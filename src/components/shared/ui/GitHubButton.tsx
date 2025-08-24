@@ -29,7 +29,7 @@ const GitHubIcon = () => (
   </svg>
 );
 
-export const GitHubButton: React.FC<GitHubButtonProps> = ({
+const GitHubButton: React.FC<GitHubButtonProps> = ({
   label = "Continue with GitHub",
   variant = "secondary",
   className,
@@ -84,3 +84,5 @@ function mapOAuthErrorToMessage(err: unknown): string {
   };
   return map[code] ?? "Unable to continue with GitHub. Please try again.";
 }
+
+export default GitHubButton;

@@ -51,7 +51,10 @@ const Signup = () => {
         </p>
 
         <div className="grid gap-2.5">
-          <GitHubButton label="Sign up with GitHub" />
+          <GitHubButton
+            label="Sign up with GitHub"
+            onSuccess={() => router.push("/")}
+          />
         </div>
 
         <div className="my-5 grid grid-cols-[1fr_auto_1fr] items-center gap-3 text-gray-400">

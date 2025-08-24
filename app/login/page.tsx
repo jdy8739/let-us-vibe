@@ -63,7 +63,10 @@ const Login = () => {
         </div>
 
         <div className="grid gap-2.5">
-          <GitHubButton label="Login with GitHub" />
+          <GitHubButton
+            label="Login with GitHub"
+            onSuccess={() => router.push("/")}
+          />
           <span className="text-xs">or</span>
           <span className="h-px bg-gray-200" />
         </div>
