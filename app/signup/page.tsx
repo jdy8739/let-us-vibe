@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { Button, TextInput } from "@/src/components/shared";
+import { Button, TextInput, GitHubButton } from "@/src/components/shared";
 import Link from "next/link";
 import { auth } from "@/src/services/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -13,6 +13,8 @@ type SignupFormValues = {
   password: string;
   confirmPassword: string;
 };
+
+// GitHub icon is provided by shared GitHubButton
 
 const Signup = () => {
   const router = useRouter();
@@ -38,6 +40,8 @@ const Signup = () => {
 
   const passwordValue = watch("password");
 
+  // GitHub OAuth handled by shared GitHubButton
+
   return (
     <main className="container-center">
       <div className="card">
@@ -45,6 +49,16 @@ const Signup = () => {
         <p className="text-muted mt-2 text-center">
           Create your account to start logging your daily tasks and insights.
         </p>
+
+        <div className="grid gap-2.5">
+          <GitHubButton label="Sign up with GitHub" />
+        </div>
+
+        <div className="my-5 grid grid-cols-[1fr_auto_1fr] items-center gap-3 text-gray-400">
+          <span className="h-px bg-gray-200" />
+          <span className="text-xs">or</span>
+          <span className="h-px bg-gray-200" />
+        </div>
 
         <form className="form mt-5" onSubmit={handleSubmit(onSubmit)}>
           {errors.root?.message && (
