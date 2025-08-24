@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import app, { getAnalytics } from "../../services/firebase";
 
-const Firebase = () => {
+const FirebaseAnalytics = () => {
   useEffect(() => {
     const analytics = getAnalytics(app);
 
@@ -13,4 +13,4 @@ const Firebase = () => {
   return null;
 };
 
-export default Firebase;
+export default FirebaseAnalytics;

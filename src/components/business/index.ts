@@ -1,3 +1,3 @@
-import Firebase from "./Firebase";
+import FirebaseAnalytics from "./FirebaseAnalytics";
 
-export { Firebase };
+export { FirebaseAnalytics };
