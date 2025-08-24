@@ -1,11 +1,11 @@
 import "../styles/index.css";
-import { FirebaseAnalytics } from "@/src/components/business";
+import Client from "@/src/components/shared/client";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html>
       <body>{children}</body>
-      <FirebaseAnalytics />
+      <Client />
     </html>
   );
 };
