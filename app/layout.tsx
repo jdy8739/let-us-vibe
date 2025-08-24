@@ -1,3 +1,4 @@
+import "./globals.css";
 import { FirebaseAnalytics } from "@/src/components/business";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
