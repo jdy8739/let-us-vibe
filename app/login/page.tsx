@@ -3,12 +3,7 @@
 import { Button, TextInput, GitHubButton } from "@/src/components/shared";
 import { useForm } from "react-hook-form";
 import { auth } from "@/src/services/firebase";
-import {
-  GithubAuthProvider,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  updateProfile,
-} from "firebase/auth";
+import { signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -97,6 +92,14 @@ const Login = () => {
             Log In
           </Button>
         </form>
+        <div className="mt-3 text-center text-sm">
+          <Link
+            href="/reset-password"
+            className="text-blue-600 hover:underline"
+          >
+            Forgot password?
+          </Link>
+        </div>
         <p className="text-muted mt-5 text-center">
           Don&apos;t have an account?{" "}
           <Link href="/signup" className="text-blue-600 hover:underline">
