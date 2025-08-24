@@ -1,18 +1,10 @@
 "use client";
 
-import { Button } from "@/src/components/shared";
-
-const GoogleIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="white"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M21.35 11.1h-9.17v2.96h5.26c-.23 1.3-1.55 3.8-5.26 3.8-3.17 0-5.76-2.62-5.76-5.86s2.59-5.86 5.76-5.86c1.8 0 3.01.77 3.7 1.43l2.52-2.43C17.3 3.35 15.1 2.4 12.18 2.4 6.86 2.4 2.62 6.64 2.62 11.96s4.24 9.56 9.56 9.56c5.52 0 9.16-3.88 9.16-9.34 0-.63-.07-1.09-.19-1.99z" />
-  </svg>
-);
+import { Button, TextInput } from "@/src/components/shared";
+import { useForm } from "react-hook-form";
+import { auth } from "@/src/services/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 const GitHubIcon = () => (
   <svg
@@ -26,7 +18,29 @@ const GitHubIcon = () => (
   </svg>
 );
 
+type LoginFormValues = { email: string; password: string };
+
 const Login = () => {
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isSubmitting },
+  } = useForm<LoginFormValues>({ mode: "onBlur" });
+
+  const onSubmit = async ({ email, password }: LoginFormValues) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      router.push("/");
+    } catch (err: unknown) {
+      setError("root", {
+        type: "server",
+        message: mapFirebaseErrorToMessage(err),
+      });
+    }
+  };
+
   return (
     <main className="container-center">
       <div className="card">
@@ -45,16 +59,61 @@ const Login = () => {
         </div>
 
         <div className="grid gap-2.5">
-          <Button type="button" leftIcon={<GoogleIcon />}>
-            Login with Google
-          </Button>
           <Button type="button" variant="secondary" leftIcon={<GitHubIcon />}>
             Login with GitHub
           </Button>
         </div>
+
+        <div className="my-5 grid grid-cols-[1fr_auto_1fr] items-center gap-3 text-gray-400">
+          <span className="h-px bg-gray-200" />
+          <span className="text-xs">or</span>
+          <span className="h-px bg-gray-200" />
+        </div>
+
+        <form className="form" onSubmit={handleSubmit(onSubmit)}>
+          {errors.root?.message && (
+            <div className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+              {errors.root.message}
+            </div>
+          )}
+
+          <TextInput
+            label="Email"
+            type="email"
+            placeholder="your.email@example.com"
+            {...register("email", { required: "Email is required" })}
+            error={errors.email?.message}
+          />
+          <TextInput
+            label="Password"
+            type="password"
+            placeholder="Enter your password"
+            {...register("password", { required: "Password is required" })}
+            error={errors.password?.message}
+          />
+
+          <Button type="submit" disabled={isSubmitting}>
+            Log In
+          </Button>
+        </form>
       </div>
     </main>
   );
 };
+
+function mapFirebaseErrorToMessage(err: unknown): string {
+  const code = (err as { code?: string })?.code ?? "unknown";
+  const map: Record<string, string> = {
+    "auth/invalid-credential": "Invalid email or password.",
+    "auth/invalid-email": "Please enter a valid email address.",
+    "auth/user-disabled": "This account has been disabled.",
+    "auth/user-not-found": "No account found with this email.",
+    "auth/wrong-password": "Incorrect password.",
+    "auth/too-many-requests": "Too many attempts. Please try again later.",
+    "auth/network-request-failed":
+      "Network error. Check your connection and try again.",
+  };
+  return map[code] ?? "Unable to sign in. Please try again.";
+}
 
 export default Login;
