@@ -1,4 +1,4 @@
-import Firebase from "@/src/components/business/Firebase";
+import { Firebase } from "@/src/components/business";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
