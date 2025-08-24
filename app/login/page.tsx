@@ -3,7 +3,7 @@
 import { Button, TextInput } from "@/src/components/shared";
 import { useForm } from "react-hook-form";
 import { auth } from "@/src/services/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 const GitHubIcon = () => (
@@ -31,7 +31,16 @@ const Login = () => {
 
   const onSubmit = async ({ email, password }: LoginFormValues) => {
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const credential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      await updateProfile(credential.user, {
+        displayName: credential.user.displayName,
+      });
+
       router.push("/");
     } catch (err: unknown) {
       setError("root", {
@@ -45,9 +54,6 @@ const Login = () => {
     <main className="container-center">
       <div className="card">
         <div className="mb-5 text-center">
-          <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-full bg-blue-100 text-2xl text-blue-600">
-            *
-          </div>
           <h1 className="title-lg">
             Welcome to Work Journal
             <br />

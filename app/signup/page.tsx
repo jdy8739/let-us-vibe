@@ -3,6 +3,9 @@
 import { useForm } from "react-hook-form";
 import { Button, TextInput } from "@/src/components/shared";
 import Link from "next/link";
+import { auth } from "@/src/services/firebase";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 type SignupFormValues = {
   name: string;
@@ -12,15 +15,25 @@ type SignupFormValues = {
 };
 
 const Signup = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
+    setError,
     watch,
     formState: { errors, isSubmitting },
   } = useForm<SignupFormValues>({ mode: "onBlur" });
 
-  const onSubmit = async () => {
-    // no-op as requested
+  const onSubmit = async ({ name, email, password }: SignupFormValues) => {
+    try {
+      const cred = await createUserWithEmailAndPassword(auth, email, password);
+      if (name) {
+        await updateProfile(cred.user, { displayName: name });
+      }
+      router.push("/");
+    } catch (err: unknown) {
+      setError("root", { type: "server", message: mapSignupError(err) });
+    }
   };
 
   const passwordValue = watch("password");
@@ -34,6 +47,11 @@ const Signup = () => {
         </p>
 
         <form className="form mt-5" onSubmit={handleSubmit(onSubmit)}>
+          {errors.root?.message && (
+            <div className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
+              {errors.root.message}
+            </div>
+          )}
           <TextInput
             label="Name"
             placeholder="Enter your full name"
@@ -89,3 +107,16 @@ const Signup = () => {
 };
 
 export default Signup;
+
+function mapSignupError(err: unknown): string {
+  const code = (err as { code?: string })?.code ?? "unknown";
+  const map: Record<string, string> = {
+    "auth/email-already-in-use": "This email is already in use.",
+    "auth/invalid-email": "Please enter a valid email address.",
+    "auth/weak-password": "Password should be at least 6 characters.",
+    "auth/operation-not-allowed": "Email/password accounts are not enabled.",
+    "auth/network-request-failed":
+      "Network error. Check your connection and try again.",
+  };
+  return map[code] ?? "Unable to sign up. Please try again.";
+}
