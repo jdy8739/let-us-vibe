@@ -17,7 +17,17 @@ const NewPostPage = () => {
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (files && files.length === 1) {
-      setFile(files[0]);
+      const selectedFile = files[0];
+
+      // Check file size (1MB = 1024 * 1024 bytes)
+      if (selectedFile.size > 1024 * 1024) {
+        alert("File size must be 1MB or less. Please select a smaller image.");
+        e.target.value = ""; // Clear the input
+        setFile(null);
+        return;
+      }
+
+      setFile(selectedFile);
     }
   };
 
@@ -143,9 +153,12 @@ const NewPostPage = () => {
                 onChange={handleFileChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
               />
+              <p className="mt-1 text-xs text-gray-500">
+                Maximum file size: 1MB. Supported formats: JPG, PNG, GIF, etc.
+              </p>
               {file && (
                 <div className="mt-2 text-sm text-gray-600">
-                  Selected: {file.name}
+                  Selected: {file.name} ({(file.size / 1024).toFixed(1)} KB)
                 </div>
               )}
             </div>
