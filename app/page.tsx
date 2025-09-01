@@ -13,6 +13,7 @@ interface Post {
   uid: string;
   createdAt: any;
   aiReview: boolean;
+  photo?: string;
 }
 
 const HomePage = () => {
@@ -106,6 +107,17 @@ const HomePage = () => {
                     {formatDate(post.createdAt)}
                   </div>
                 </div>
+
+                {/* Image Display */}
+                {post.photo && (
+                  <div className="mb-4">
+                    <img
+                      src={post.photo}
+                      alt={post.title}
+                      className="w-full max-h-96 object-cover rounded"
+                    />
+                  </div>
+                )}
 
                 <p className="text-gray-600 mb-4">
                   {truncateContent(post.content)}

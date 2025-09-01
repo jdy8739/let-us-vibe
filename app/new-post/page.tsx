@@ -1,16 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { addDoc, collection } from "firebase/firestore";
-import { db, auth } from "@/src/services/firebase";
+import { addDoc, collection, updateDoc, doc } from "firebase/firestore";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { db, auth, storage } from "@/src/services/firebase";
 import { useRouter } from "next/navigation";
 
 const NewPostPage = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [aiReview, setAiReview] = useState(true);
+  const [file, setFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { files } = e.target;
+    if (files && files.length === 1) {
+      setFile(files[0]);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,6 +37,7 @@ const NewPostPage = () => {
     setIsSubmitting(true);
 
     try {
+      // First, create the post document
       const postData = {
         title: title.trim(),
         content: body.trim(),
@@ -38,7 +48,25 @@ const NewPostPage = () => {
         aiReview: aiReview,
       };
 
-      await addDoc(collection(db, "posts"), postData);
+      const docRef = await addDoc(collection(db, "posts"), postData);
+
+      // If there's a file, upload it to Firebase Storage
+      if (file) {
+        const locationRef = ref(
+          storage,
+          `posts/${auth.currentUser.uid}-${
+            auth.currentUser.displayName || "user"
+          }/${docRef.id}`
+        );
+
+        const result = await uploadBytes(locationRef, file);
+        const url = await getDownloadURL(result.ref);
+
+        // Update the post document with the image URL
+        await updateDoc(doc(db, "posts", docRef.id), {
+          photo: url,
+        });
+      }
 
       alert("Post created successfully!");
       router.push("/");
@@ -98,6 +126,28 @@ const NewPostPage = () => {
                 placeholder="Write your journal entry here..."
                 required
               />
+            </div>
+
+            {/* Image Upload */}
+            <div>
+              <label
+                htmlFor="image"
+                className="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Image (Optional)
+              </label>
+              <input
+                type="file"
+                id="image"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
+              />
+              {file && (
+                <div className="mt-2 text-sm text-gray-600">
+                  Selected: {file.name}
+                </div>
+              )}
             </div>
 
             {/* AI Review Section */}
