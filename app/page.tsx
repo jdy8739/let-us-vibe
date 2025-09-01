@@ -143,12 +143,20 @@ const HomePage = () => {
           <h1 className="text-3xl font-semibold text-gray-900">
             My Journal Posts
           </h1>
-          <Link
-            href="/new-post"
-            className="px-4 py-2 bg-gray-900 text-white rounded hover:bg-gray-800"
-          >
-            New Post
-          </Link>
+          <div className="flex space-x-3">
+            <Link
+              href="/profile"
+              className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-50"
+            >
+              Profile
+            </Link>
+            <Link
+              href="/new-post"
+              className="px-4 py-2 bg-gray-900 text-white rounded hover:bg-gray-800"
+            >
+              New Post
+            </Link>
+          </div>
         </div>
 
         {posts.length === 0 ? (
