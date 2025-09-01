@@ -105,8 +105,8 @@ const UserProfilePage = ({ params }: { params: { uid: string } }) => {
         console.log("Fetching posts for UID:", params.uid);
         const postsQuery = query(
           collection(db, "posts"),
-          where("uid", "==", params.uid),
-          orderBy("createdAt", "desc")
+          where("uid", "==", params.uid)
+          // Removed orderBy to avoid index requirement
         );
 
         const postsSnapshot = await getDocs(postsQuery);
@@ -114,6 +114,14 @@ const UserProfilePage = ({ params }: { params: { uid: string } }) => {
           id: doc.id,
           ...doc.data(),
         })) as Post[];
+
+        // Sort posts by createdAt on client side
+        postsData.sort((a, b) => {
+          if (!a.createdAt || !b.createdAt) return 0;
+          const dateA = a.createdAt.toDate();
+          const dateB = b.createdAt.toDate();
+          return dateB.getTime() - dateA.getTime(); // Descending order
+        });
 
         console.log("Found posts:", postsData.length);
         setPosts(postsData);
