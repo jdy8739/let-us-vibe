@@ -1,11 +1,54 @@
 "use client";
 
 import { useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
+import { db, auth } from "@/src/services/firebase";
+import { useRouter } from "next/navigation";
 
 const NewPostPage = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [aiReview, setAiReview] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!title.trim() || !body.trim()) {
+      alert("Please fill in both title and body");
+      return;
+    }
+
+    if (!auth.currentUser) {
+      alert("Please login to create a post");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const postData = {
+        title: title.trim(),
+        content: body.trim(),
+        username:
+          auth.currentUser.displayName || auth.currentUser.email || "Anonymous",
+        uid: auth.currentUser.uid,
+        createdAt: new Date(),
+        aiReview: aiReview,
+      };
+
+      await addDoc(collection(db, "posts"), postData);
+
+      alert("Post created successfully!");
+      router.push("/");
+    } catch (error) {
+      console.error("Error creating post:", error);
+      alert("Failed to create post. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -18,7 +61,7 @@ const NewPostPage = () => {
             <p className="text-gray-600">Write your new journal entry below.</p>
           </div>
 
-          <form className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {/* Title Input */}
             <div>
               <label
@@ -34,6 +77,7 @@ const NewPostPage = () => {
                 onChange={(e) => setTitle(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400"
                 placeholder="Enter your post title"
+                required
               />
             </div>
 
@@ -52,6 +96,7 @@ const NewPostPage = () => {
                 rows={8}
                 className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-400 resize-none"
                 placeholder="Write your journal entry here..."
+                required
               />
             </div>
 
@@ -92,15 +137,18 @@ const NewPostPage = () => {
             <div className="flex justify-end space-x-3 pt-4">
               <button
                 type="button"
+                onClick={() => router.push("/")}
                 className="px-6 py-2 border border-gray-300 rounded hover:bg-gray-50"
+                disabled={isSubmitting}
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-6 py-2 bg-gray-900 text-white rounded hover:bg-gray-800"
+                disabled={isSubmitting}
+                className="px-6 py-2 bg-gray-900 text-white rounded hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Create Post
+                {isSubmitting ? "Creating..." : "Create Post"}
               </button>
             </div>
           </form>
