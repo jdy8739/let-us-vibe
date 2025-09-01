@@ -144,12 +144,14 @@ const HomePage = () => {
             My Journal Posts
           </h1>
           <div className="flex space-x-3">
-            <Link
-              href="/profile"
-              className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-50"
-            >
-              Profile
-            </Link>
+            {auth.currentUser && (
+              <Link
+                href={`/profile/${auth.currentUser.uid}`}
+                className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-50"
+              >
+                Profile
+              </Link>
+            )}
             <Link
               href="/new-post"
               className="px-4 py-2 bg-gray-900 text-white rounded hover:bg-gray-800"
@@ -196,7 +198,13 @@ const HomePage = () => {
 
                 <div className="flex justify-between items-center">
                   <div className="text-sm text-gray-500">
-                    By {post.username}
+                    By{" "}
+                    <Link
+                      href={`/profile/${post.uid}`}
+                      className="text-blue-600 hover:text-blue-800 hover:underline"
+                    >
+                      {post.username}
+                    </Link>
                   </div>
 
                   <div className="flex space-x-3">
