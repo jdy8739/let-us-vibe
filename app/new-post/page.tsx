@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Header } from "@/src/components/shared";
 
 const NewPostPage = () => {
   const [title, setTitle] = useState("");
