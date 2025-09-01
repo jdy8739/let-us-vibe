@@ -3,15 +3,13 @@
 import { useState } from "react";
 import { Header } from "@/src/components/shared";
 
-export default function NewPostPage() {
+const NewPostPage = () => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [aiReview, setAiReview] = useState(true);
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
-
       <main className="max-w-3xl mx-auto px-4 py-12">
         <div className="bg-white border rounded-lg p-8">
           <div className="mb-8">
@@ -111,4 +109,6 @@ export default function NewPostPage() {
       </main>
     </div>
   );
-}
+};
+
+export default NewPostPage;
