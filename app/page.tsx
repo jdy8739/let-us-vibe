@@ -1,8 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import { db } from "@/src/services/firebase";
+import {
+  collection,
+  getDocs,
+  orderBy,
+  query,
+  deleteDoc,
+  doc,
+  Timestamp,
+} from "firebase/firestore";
+import { ref, deleteObject } from "firebase/storage";
+import { db, auth, storage } from "@/src/services/firebase";
 import Link from "next/link";
 
 interface Post {
@@ -11,7 +20,7 @@ interface Post {
   content: string;
   username: string;
   uid: string;
-  createdAt: any;
+  createdAt: Timestamp;
   aiReview: boolean;
   photo?: string;
 }
@@ -19,6 +28,7 @@ interface Post {
 const HomePage = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
+  const [deletingPostId, setDeletingPostId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -42,10 +52,63 @@ const HomePage = () => {
     fetchPosts();
   }, []);
 
-  const formatDate = (timestamp: any) => {
+  const handleDeletePost = async (postId: string, postUid: string) => {
+    if (!auth.currentUser) {
+      alert("Please login to delete posts");
+      return;
+    }
+
+    if (auth.currentUser.uid !== postUid) {
+      alert("You can only delete your own posts");
+      return;
+    }
+
+    if (!confirm("Are you sure you want to delete this post?")) {
+      return;
+    }
+
+    setDeletingPostId(postId);
+
+    try {
+      // Find the post to get the image path
+      const postToDelete = posts.find((post) => post.id === postId);
+
+      // Delete the post document first
+      await deleteDoc(doc(db, "posts", postId));
+
+      // If the post has an image, delete it from Firebase Storage
+      if (postToDelete?.photo) {
+        try {
+          // Extract the image path from the photo URL
+          // The URL format is: https://firebasestorage.googleapis.com/.../posts/uid-username/postId
+          const photoUrl = new URL(postToDelete.photo);
+          const pathSegments = photoUrl.pathname.split("/");
+          const storagePath = pathSegments.slice(-3).join("/"); // posts/uid-username/postId
+
+          const imageRef = ref(storage, storagePath);
+          await deleteObject(imageRef);
+        } catch (imageError) {
+          console.error("Error deleting image:", imageError);
+          // Image deletion failed, but post was deleted, so continue
+        }
+      }
+
+      // Remove the deleted post from local state
+      setPosts(posts.filter((post) => post.id !== postId));
+
+      alert("Post deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      alert("Failed to delete post. Please try again.");
+    } finally {
+      setDeletingPostId(null);
+    }
+  };
+
+  const formatDate = (timestamp: Timestamp) => {
     if (!timestamp) return "Unknown date";
 
-    const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+    const date = timestamp.toDate();
     return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
@@ -134,12 +197,22 @@ const HomePage = () => {
                         AI Review
                       </span>
                     )}
-                    <button className="text-gray-600 hover:text-gray-900 text-sm">
-                      Edit
-                    </button>
-                    <button className="text-red-600 hover:text-red-900 text-sm">
-                      Delete
-                    </button>
+                    {auth.currentUser && auth.currentUser.uid === post.uid && (
+                      <>
+                        <button className="text-gray-600 hover:text-gray-900 text-sm">
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDeletePost(post.id, post.uid)}
+                          disabled={deletingPostId === post.id}
+                          className="text-red-600 hover:text-red-900 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          {deletingPostId === post.id
+                            ? "Deleting..."
+                            : "Delete"}
+                        </button>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
