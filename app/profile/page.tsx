@@ -199,6 +199,12 @@ const ProfilePage = () => {
               </Link>
 
               <div className="flex space-x-3">
+                <Link
+                  href="/profile-settings"
+                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                >
+                  Settings
+                </Link>
                 <button
                   onClick={() => auth.signOut()}
                   className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
