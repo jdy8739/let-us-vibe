@@ -199,9 +199,12 @@ const HomePage = () => {
                     )}
                     {auth.currentUser && auth.currentUser.uid === post.uid && (
                       <>
-                        <button className="text-gray-600 hover:text-gray-900 text-sm">
+                        <Link
+                          href={`/edit-post/${post.id}`}
+                          className="text-gray-600 hover:text-gray-900 text-sm"
+                        >
                           Edit
-                        </button>
+                        </Link>
                         <button
                           onClick={() => handleDeletePost(post.id, post.uid)}
                           disabled={deletingPostId === post.id}
