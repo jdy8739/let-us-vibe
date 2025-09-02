@@ -93,23 +93,23 @@ const NewPostPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <main className="max-w-4xl mx-auto px-6 py-16">
         {/* Header Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4 tracking-tight">
+        <div className="mb-10">
+          <h1 className="text-4xl font-bold text-gray-900 tracking-tight">
             Create New Post
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Share your thoughts and experiences with the world
+          <p className="mt-2 text-base text-gray-600 max-w-3xl">
+            Share your thoughts and experiences with the world.
           </p>
         </div>
 
         {/* Form Container */}
-        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-12">
-          <form onSubmit={handleSubmit} className="space-y-8">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {/* Title Input */}
             <div>
               <label
                 htmlFor="title"
-                className="block text-lg font-semibold text-gray-900 mb-4"
+                className="block text-sm font-semibold text-gray-900 mb-2.5"
               >
                 Post Title
               </label>
@@ -119,8 +119,8 @@ const NewPostPage = () => {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
-                className="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white"
-                placeholder="Enter your post title..."
+                className="w-full px-4 py-3 text-base border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white"
+                placeholder="Post title"
               />
             </div>
 
@@ -128,7 +128,7 @@ const NewPostPage = () => {
             <div>
               <label
                 htmlFor="content"
-                className="block text-lg font-semibold text-gray-900 mb-4"
+                className="block text-sm font-semibold text-gray-900 mb-2.5"
               >
                 Post Content
               </label>
@@ -138,21 +138,21 @@ const NewPostPage = () => {
                 onChange={(e) => setBody(e.target.value)}
                 required
                 rows={8}
-                className="w-full px-6 py-4 text-lg border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white resize-none"
-                placeholder="Write your thoughts, experiences, or memories here..."
+                className="w-full px-4 py-3 text-base border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white resize-none"
+                placeholder="Write your thoughts here..."
               />
             </div>
 
             {/* Image Upload */}
             <div>
-              <label className="block text-lg font-semibold text-gray-900 mb-4">
+              <label className="block text-sm font-semibold text-gray-900 mb-2.5">
                 Add Image (Optional)
               </label>
               <div className="space-y-4">
                 <div className="flex items-center justify-center w-full">
                   <label
                     htmlFor="file-upload"
-                    className="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
+                    className="flex flex-col items-center justify-center w-full h-28 border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors duration-200"
                   >
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                       <svg
@@ -168,11 +168,11 @@ const NewPostPage = () => {
                           d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                         />
                       </svg>
-                      <p className="mb-2 text-lg text-gray-600">
+                      <p className="mb-1.5 text-sm text-gray-600">
                         <span className="font-semibold">Click to upload</span>{" "}
                         or drag and drop
                       </p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-xs text-gray-500">
                         PNG, JPG, GIF up to 1MB
                       </p>
                     </div>
@@ -188,10 +188,10 @@ const NewPostPage = () => {
 
                 {/* File Info */}
                 {file && (
-                  <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+                  <div className="bg-gray-50 border border-gray-200 rounded-xl p-3">
                     <div className="flex items-center space-x-3">
                       <svg
-                        className="w-6 h-6 text-blue-600"
+                        className="w-5 h-5 text-gray-700"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -204,17 +204,17 @@ const NewPostPage = () => {
                         />
                       </svg>
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-blue-900">
+                        <p className="text-sm font-medium text-gray-900">
                           {file.name}
                         </p>
-                        <p className="text-xs text-blue-700">
+                        <p className="text-xs text-gray-600">
                           {(file.size / 1024 / 1024).toFixed(2)} MB
                         </p>
                       </div>
                       <button
                         type="button"
                         onClick={() => setFile(null)}
-                        className="text-blue-600 hover:text-blue-800 transition-colors duration-200"
+                        className="text-gray-700 hover:text-gray-900 transition-colors duration-200"
                       >
                         <svg
                           className="w-5 h-5"
@@ -237,7 +237,7 @@ const NewPostPage = () => {
             </div>
 
             {/* AI Review Checkbox */}
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center gap-2.5">
               <input
                 type="checkbox"
                 id="aiReview"
@@ -247,20 +247,20 @@ const NewPostPage = () => {
               />
               <label
                 htmlFor="aiReview"
-                className="text-lg font-medium text-gray-900"
+                className="text-sm font-medium text-gray-900"
               >
                 Enable AI Review for this post
               </label>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex items-center justify-end space-x-4 pt-6 border-t border-gray-200">
+            <div className="flex items-center justify-end gap-3 pt-6 border-t border-gray-200">
               <Link
                 href="/"
-                className="inline-flex items-center px-8 py-3 bg-white text-gray-700 border-2 border-gray-200 font-semibold rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md"
+                className="inline-flex items-center px-4 py-2 bg-white text-gray-700 border border-gray-200 font-medium rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md"
               >
                 <svg
-                  className="w-5 h-5 mr-2"
+                  className="w-4 h-4 mr-2"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -277,12 +277,12 @@ const NewPostPage = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                className="inline-flex items-center px-5 py-2.5 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? (
                   <>
                     <svg
-                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                      className="animate-spin -ml-1 mr-3 h-4 w-4 text-white"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -306,7 +306,7 @@ const NewPostPage = () => {
                 ) : (
                   <>
                     <svg
-                      className="w-5 h-5 mr-2"
+                      className="w-4 h-4 mr-2"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"

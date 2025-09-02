@@ -124,12 +124,14 @@ const HomePage = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <main className="max-w-4xl mx-auto px-4 py-12">
-          <h1 className="text-3xl font-semibold text-gray-900 mb-8">
+        <main className="max-w-4xl mx-auto px-12 py-20">
+          <h1 className="text-3xl font-semibold text-gray-900 mb-12 py-6 px-4">
             My Journal Posts
           </h1>
-          <div className="text-center py-8">
-            <div className="text-gray-600">Loading posts...</div>
+          <div className="text-center py-16 px-8">
+            <div className="text-gray-600 py-4 px-6 text-lg">
+              Loading posts...
+            </div>
           </div>
         </main>
       </div>
@@ -138,28 +140,27 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <main className="max-w-5xl mx-auto px-6 py-16">
+      <main className="max-w-5xl mx-auto px-12 py-24">
         {/* Header Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4 tracking-tight">
+        <div className="mb-20 py-12 px-4">
+          <h1 className="text-4xl font-bold text-gray-900 tracking-tight py-6 px-4">
             My Journal Posts
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Capture your thoughts, experiences, and memories in your personal
-            digital journal
+          <p className="mt-6 text-base text-gray-600 max-w-3xl py-5 px-4 leading-relaxed">
+            Keep your thoughts organized and look back on moments that matter.
           </p>
         </div>
 
         {/* Action Bar */}
-        <div className="flex justify-center mb-12">
-          <div className="flex items-center space-x-4">
+        <div className="mb-20 py-10 px-4">
+          <div className="flex items-center gap-6">
             {auth.currentUser && (
               <Link
                 href={`/profile/${auth.currentUser.uid}`}
-                className="inline-flex items-center px-6 py-3 bg-white text-gray-700 border border-gray-200 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md"
+                className="inline-flex items-center px-12 py-6 bg-white text-gray-700 border border-gray-200 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md font-medium text-lg"
               >
                 <svg
-                  className="w-5 h-5 mr-2"
+                  className="w-6 h-6 mr-4"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -176,10 +177,10 @@ const HomePage = () => {
             )}
             <Link
               href="/new-post"
-              className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              className="inline-flex items-center px-12 py-6 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md text-lg"
             >
               <svg
-                className="w-5 h-5 mr-2"
+                className="w-6 h-6 mr-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -197,8 +198,8 @@ const HomePage = () => {
         </div>
 
         {posts.length === 0 ? (
-          <div className="text-center py-20">
-            <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-6 flex items-center justify-center">
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 text-center py-32 px-16">
+            <div className="w-24 h-24 bg-gray-100 rounded-full mx-auto mb-10 flex items-center justify-center p-6">
               <svg
                 className="w-12 h-12 text-gray-400"
                 fill="none"
@@ -213,18 +214,18 @@ const HomePage = () => {
                 />
               </svg>
             </div>
-            <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+            <h3 className="text-3xl font-bold text-gray-900 mb-8 py-4 px-6">
               No posts yet
             </h3>
-            <p className="text-gray-600 text-lg mb-8 max-w-md mx-auto">
+            <p className="text-gray-600 mb-16 max-w-lg mx-auto py-6 px-8 leading-relaxed text-lg">
               Start your journaling journey by creating your first post
             </p>
             <Link
               href="/new-post"
-              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+              className="inline-flex items-center px-14 py-6 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors duration-200 shadow-sm hover:shadow-md text-lg"
             >
               <svg
-                className="w-5 h-5 mr-2"
+                className="w-6 h-6 mr-4"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -240,68 +241,70 @@ const HomePage = () => {
             </Link>
           </div>
         ) : (
-          <div className="grid gap-8">
+          <div className="space-y-12">
             {posts.map((post) => (
               <article
                 key={post.id}
-                className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+                className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md hover:border-gray-300 transition-all duration-200 p-2"
               >
                 {/* Post Header */}
-                <div className="p-8 pb-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <h2 className="text-2xl font-bold text-gray-900 leading-tight pr-4">
+                <div className="p-16 pb-12">
+                  <div className="flex justify-between items-start gap-10 mb-10">
+                    <h2 className="text-2xl font-bold text-gray-900 leading-tight flex-1 py-4 px-2">
                       {post.title}
                     </h2>
-                    <div className="text-sm text-gray-500 bg-gray-50 px-3 py-1 rounded-full whitespace-nowrap">
+                    <div className="text-sm text-gray-500 bg-gray-50 px-8 py-4 rounded-lg whitespace-nowrap font-medium">
                       {formatDate(post.createdAt)}
                     </div>
                   </div>
 
                   {/* Author Info */}
-                  <div className="flex items-center mb-6">
-                    <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mr-3">
-                      <span className="text-white text-sm font-semibold">
-                        {post.username.charAt(0).toUpperCase()}
-                      </span>
+                  <div className="flex items-center gap-8 mb-10 py-6 px-2">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center text-gray-700 text-lg font-bold ring-2 ring-white shadow-sm p-2">
+                      {post.username.charAt(0).toUpperCase()}
                     </div>
-                    <span className="text-gray-600">
-                      By{" "}
+                    <div className="py-3 px-2">
+                      <div className="text-sm text-gray-500 mb-3 px-2 py-1">
+                        Author
+                      </div>
                       <Link
                         href={`/profile/${post.uid}`}
-                        className="text-blue-600 hover:text-blue-800 font-medium hover:underline transition-colors"
+                        className="text-gray-900 hover:text-gray-700 font-semibold transition-colors px-2 py-2 text-lg"
                       >
                         {post.username}
                       </Link>
-                    </span>
+                    </div>
                   </div>
                 </div>
 
                 {/* Image Display */}
                 {post.photo && (
-                  <div className="px-8 pb-6">
-                    <img
-                      src={post.photo}
-                      alt={post.title}
-                      className="w-full max-h-96 object-cover rounded-xl shadow-sm"
-                    />
+                  <div className="px-16 pb-14">
+                    <div className="rounded-xl overflow-hidden bg-gray-100 shadow-sm p-2">
+                      <img
+                        src={post.photo}
+                        alt={post.title}
+                        className="w-full max-h-80 object-cover rounded-lg"
+                      />
+                    </div>
                   </div>
                 )}
 
                 {/* Post Content */}
-                <div className="px-8 pb-6">
-                  <p className="text-gray-700 text-lg leading-relaxed">
+                <div className="px-16 pb-16">
+                  <p className="text-gray-700 text-lg leading-relaxed py-6 px-4">
                     {truncateContent(post.content)}
                   </p>
                 </div>
 
                 {/* Post Footer */}
-                <div className="px-8 py-6 bg-gray-50 border-t border-gray-100">
+                <div className="px-16 py-12 bg-gray-50 border-t border-gray-100">
                   <div className="flex justify-between items-center">
-                    <div className="flex items-center space-x-3">
+                    <div className="flex items-center gap-6 py-4 px-2">
                       {post.aiReview && (
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                        <span className="inline-flex items-center px-7 py-4 rounded-lg text-sm font-semibold bg-blue-50 text-blue-700 border border-blue-100">
                           <svg
-                            className="w-3 h-3 mr-1"
+                            className="w-4 h-4 mr-3"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -311,20 +314,20 @@ const HomePage = () => {
                               clipRule="evenodd"
                             />
                           </svg>
-                          AI Review
+                          AI Reviewed
                         </span>
                       )}
                     </div>
 
                     {/* Action Buttons */}
                     {auth.currentUser && auth.currentUser.uid === post.uid && (
-                      <div className="flex items-center space-x-4">
+                      <div className="flex items-center gap-4 py-4 px-2">
                         <Link
                           href={`/edit-post/${post.id}`}
-                          className="inline-flex items-center px-4 py-2 text-gray-600 hover:text-gray-800 font-medium transition-colors duration-200"
+                          className="inline-flex items-center px-8 py-4 text-gray-700 hover:text-gray-900 font-medium rounded-lg hover:bg-white transition-all duration-200 border border-transparent hover:border-gray-200 text-lg"
                         >
                           <svg
-                            className="w-4 h-4 mr-1"
+                            className="w-5 h-5 mr-3"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -341,10 +344,10 @@ const HomePage = () => {
                         <button
                           onClick={() => handleDeletePost(post.id, post.uid)}
                           disabled={deletingPostId === post.id}
-                          className="inline-flex items-center px-4 py-2 text-red-600 hover:text-red-800 font-medium transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                          className="inline-flex items-center px-8 py-4 text-red-600 hover:text-red-800 font-medium rounded-lg hover:bg-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-transparent hover:border-red-200 text-lg"
                         >
                           <svg
-                            className="w-4 h-4 mr-1"
+                            className="w-5 h-5 mr-3"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"

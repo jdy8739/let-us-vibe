@@ -4,12 +4,12 @@ import Header from "@/src/components/layout/Header";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <html>
-      <body>
+    <html lang="en" className="scroll-smooth">
+      <body className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 text-gray-900 antialiased">
         <Header />
-        {children}
+        <div className="min-h-[calc(100vh-64px)]">{children}</div>
+        <Client />
       </body>
-      <Client />
     </html>
   );
 };

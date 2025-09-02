@@ -216,12 +216,12 @@ const ProfileSettingsPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <main className="max-w-4xl mx-auto px-6 py-16">
         {/* Header Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-bold text-gray-900 mb-4 tracking-tight">
+        <div className="mb-10">
+          <h1 className="text-4xl font-bold text-gray-900 tracking-tight">
             Profile Settings
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Manage your profile information and account settings
+          <p className="mt-2 text-base text-gray-600">
+            Manage your profile information and account settings.
           </p>
         </div>
 
@@ -233,8 +233,8 @@ const ProfileSettingsPage = () => {
         ) : (
           <div className="space-y-8">
             {/* Profile Update Section */}
-            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
                 Update Profile
               </h2>
 

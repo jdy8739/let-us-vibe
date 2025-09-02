@@ -4,3 +4,7 @@ export { TextInput } from "./ui/TextInput";
 export type { TextInputProps } from "./ui/TextInput";
 export { default as GitHubButton } from "./ui/GitHubButton";
 export type { GitHubButtonProps } from "./ui/GitHubButton";
+export { default as Avatar } from "./ui/Avatar";
+export type { AvatarProps } from "./ui/Avatar";
+export { default as Badge } from "./ui/Badge";
+export type { BadgeProps } from "./ui/Badge";
