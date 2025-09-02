@@ -14,7 +14,6 @@ h6,
 p,
 blockquote,
 pre,
-a,
 abbr,
 acronym,
 address,
@@ -41,9 +40,6 @@ b,
 u,
 i,
 center,
-dl,
-dt,
-dd,
 ol,
 ul,
 li,
@@ -81,6 +77,26 @@ audio,
 video {
   margin: 0;
   padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* Separate reset for anchor tags to preserve Tailwind padding */
+a {
+  margin: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* Separate reset for description list elements to preserve Tailwind padding */
+dl,
+dt,
+dd {
+  margin: 0;
   border: 0;
   font-size: 100%;
   font: inherit;

@@ -193,7 +193,7 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
             </div>
             <Link
               href="/"
-              className="px-4 py-2 bg-gray-900 text-white rounded hover:bg-gray-800"
+              className="px-8 py-4 bg-gray-900 text-white rounded-lg hover:bg-gray-800 font-semibold text-lg transition-all duration-200"
             >
               Back to Home
             </Link>
@@ -311,42 +311,42 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
               Account Information
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <dl className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-5">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide">
+                  <dt className="text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide px-2 py-1">
                     Display Name
-                  </label>
-                  <div className="px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900">
+                  </dt>
+                  <dd className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900">
                     {user.displayName || "Not set"}
-                  </div>
+                  </dd>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide">
+                  <dt className="text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide px-2 py-1">
                     Email Address
-                  </label>
-                  <div className="px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900">
+                  </dt>
+                  <dd className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900">
                     {user.email || "Not set"}
-                  </div>
+                  </dd>
                 </div>
               </div>
 
               <div className="space-y-5">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide">
+                  <dt className="text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide px-2 py-1">
                     User ID
-                  </label>
-                  <div className="px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-mono text-sm">
+                  </dt>
+                  <dd className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-mono text-sm">
                     {user.uid}
-                  </div>
+                  </dd>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide">
+                  <dt className="text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide px-2 py-1">
                     Email Verified
-                  </label>
-                  <div className="px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl">
+                  </dt>
+                  <dd className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl">
                     <span
                       className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                         user.emailVerified
@@ -386,35 +386,35 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
                         </>
                       )}
                     </span>
-                  </div>
+                  </dd>
                 </div>
               </div>
-            </div>
+            </dl>
 
             {/* Account Details */}
             <div className="border-t border-gray-200 pt-6 mt-6">
               <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
                 Account Details
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <dl className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide">
+                  <dt className="text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide px-2 py-1">
                     Account Created
-                  </label>
-                  <div className="px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900">
+                  </dt>
+                  <dd className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900">
                     {formatDate(user.createdAt || "")}
-                  </div>
+                  </dd>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide">
+                  <dt className="text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide px-2 py-1">
                     Last Sign In
-                  </label>
-                  <div className="px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900">
+                  </dt>
+                  <dd className="px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900">
                     {formatDate(user.lastSignInTime || "")}
-                  </div>
+                  </dd>
                 </div>
-              </div>
+              </dl>
             </div>
           </div>
         )}
@@ -543,7 +543,7 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
                         <div className="flex items-center gap-3">
                           <Link
                             href={`/edit-post/${post.id}`}
-                            className="inline-flex items-center px-3 py-1.5 text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200"
+                            className="inline-flex items-center px-3 py-1 text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200 rounded hover:bg-gray-100"
                           >
                             <svg
                               className="w-4 h-4 mr-1"

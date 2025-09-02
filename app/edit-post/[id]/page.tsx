@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import {
   ref,
@@ -24,7 +24,8 @@ interface Post {
   photo?: string;
 }
 
-const EditPostPage = ({ params }: { params: { id: string } }) => {
+const EditPostPage = ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = use(params);
   const [post, setPost] = useState<Post | null>(null);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
@@ -38,7 +39,7 @@ const EditPostPage = ({ params }: { params: { id: string } }) => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const postDoc = await getDoc(doc(db, "posts", params.id));
+        const postDoc = await getDoc(doc(db, "posts", id));
 
         if (!postDoc.exists()) {
           setError("Post not found");
@@ -68,7 +69,7 @@ const EditPostPage = ({ params }: { params: { id: string } }) => {
     };
 
     fetchPost();
-  }, [params.id]);
+  }, [id]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
@@ -387,7 +388,7 @@ const EditPostPage = ({ params }: { params: { id: string } }) => {
               <div className="flex items-center justify-end gap-3 pt-6 border-t border-gray-200">
                 <Link
                   href="/"
-                  className="inline-flex items-center px-4 py-2 bg-white text-gray-700 border border-gray-200 font-medium rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md"
+                  className="inline-flex items-center px-6 py-3 bg-white text-gray-700 border border-gray-200 font-medium rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md"
                 >
                   <svg
                     className="w-4 h-4 mr-2"

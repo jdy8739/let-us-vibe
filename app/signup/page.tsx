@@ -209,7 +209,7 @@ const Signup = () => {
               Already have an account?{" "}
               <Link
                 href="/login"
-                className="text-blue-600 hover:text-blue-800 font-semibold hover:underline transition-colors"
+                className="text-blue-600 hover:text-blue-800 font-semibold hover:underline transition-colors px-2 py-1 rounded hover:bg-blue-50"
               >
                 Sign in
               </Link>

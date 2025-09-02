@@ -46,3 +46,47 @@
 .form {
   @apply grid gap-4;
 }
+
+/* Ensure Link components can have padding */
+a {
+  text-decoration: none;
+}
+
+/* Fix for Link components with Tailwind padding classes */
+a[class*="px-"],
+a[class*="py-"],
+a[class*="p-"] {
+  display: inline-flex !important;
+}
+
+/* Description list styling */
+dl {
+  margin: 0;
+}
+
+dt {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+dd {
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+dd:last-child {
+  margin-bottom: 0;
+}
+
+/* Fix for description list elements with Tailwind padding classes */
+dl[class*="px-"],
+dl[class*="py-"],
+dl[class*="p-"],
+dt[class*="px-"],
+dt[class*="py-"],
+dt[class*="p-"],
+dd[class*="px-"],
+dd[class*="py-"],
+dd[class*="p-"] {
+  display: block !important;
+}

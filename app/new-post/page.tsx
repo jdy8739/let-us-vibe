@@ -257,7 +257,7 @@ const NewPostPage = () => {
             <div className="flex items-center justify-end gap-3 pt-6 border-t border-gray-200">
               <Link
                 href="/"
-                className="inline-flex items-center px-4 py-2 bg-white text-gray-700 border border-gray-200 font-medium rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md"
+                className="inline-flex items-center px-8 py-4 bg-white text-gray-700 border border-gray-200 font-medium rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md text-lg"
               >
                 <svg
                   className="w-4 h-4 mr-2"

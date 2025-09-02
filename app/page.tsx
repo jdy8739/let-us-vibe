@@ -157,7 +157,7 @@ const HomePage = () => {
             {auth.currentUser && (
               <Link
                 href={`/profile/${auth.currentUser.uid}`}
-                className="inline-flex items-center px-12 py-6 bg-white text-gray-700 border border-gray-200 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md font-medium text-lg"
+                className="inline-flex items-center px-6 py-3 bg-white text-gray-700 border border-gray-200 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md font-medium text-lg"
               >
                 <svg
                   className="w-6 h-6 mr-4"
@@ -177,7 +177,7 @@ const HomePage = () => {
             )}
             <Link
               href="/new-post"
-              className="inline-flex items-center px-12 py-6 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md text-lg"
+              className="inline-flex items-center px-6 py-3 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md text-lg"
             >
               <svg
                 className="w-6 h-6 mr-4"
@@ -222,7 +222,7 @@ const HomePage = () => {
             </p>
             <Link
               href="/new-post"
-              className="inline-flex items-center px-14 py-6 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors duration-200 shadow-sm hover:shadow-md text-lg"
+              className="inline-flex items-center px-6 py-3 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors duration-200 shadow-sm hover:shadow-md text-lg"
             >
               <svg
                 className="w-6 h-6 mr-4"
@@ -269,7 +269,7 @@ const HomePage = () => {
                       </div>
                       <Link
                         href={`/profile/${post.uid}`}
-                        className="text-gray-900 hover:text-gray-700 font-semibold transition-colors px-2 py-2 text-lg"
+                        className="text-gray-900 hover:text-gray-700 font-semibold transition-colors px-3 py-2 text-lg rounded-lg hover:bg-gray-50"
                       >
                         {post.username}
                       </Link>
@@ -324,7 +324,7 @@ const HomePage = () => {
                       <div className="flex items-center gap-4 py-4 px-2">
                         <Link
                           href={`/edit-post/${post.id}`}
-                          className="inline-flex items-center px-8 py-4 text-gray-700 hover:text-gray-900 font-medium rounded-lg hover:bg-white transition-all duration-200 border border-transparent hover:border-gray-200 text-lg"
+                          className="inline-flex items-center px-4 py-2 text-gray-700 hover:text-gray-900 font-medium rounded-lg hover:bg-white transition-all duration-200 border border-transparent hover:border-gray-200 text-lg"
                         >
                           <svg
                             className="w-5 h-5 mr-3"
@@ -344,7 +344,7 @@ const HomePage = () => {
                         <button
                           onClick={() => handleDeletePost(post.id, post.uid)}
                           disabled={deletingPostId === post.id}
-                          className="inline-flex items-center px-8 py-4 text-red-600 hover:text-red-800 font-medium rounded-lg hover:bg-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-transparent hover:border-red-200 text-lg"
+                          className="inline-flex items-center px-10 py-5 text-red-600 hover:text-red-800 font-medium rounded-lg hover:bg-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-transparent hover:border-red-200 text-lg"
                         >
                           <svg
                             className="w-5 h-5 mr-3"

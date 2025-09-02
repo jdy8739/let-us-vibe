@@ -371,17 +371,17 @@ const ProfileSettingsPage = () => {
                 </div>
 
                 {/* Email (Read-only) */}
-                <div>
-                  <label className="block text-lg font-semibold text-gray-900 mb-4">
+                <dl>
+                  <dt className="text-lg font-semibold text-gray-900 mb-4 px-2 py-1">
                     Email Address
-                  </label>
-                  <div className="px-6 py-4 text-lg bg-gray-100 border-2 border-gray-200 rounded-xl text-gray-600">
+                  </dt>
+                  <dd className="px-6 py-4 text-lg bg-gray-100 border-2 border-gray-200 rounded-xl text-gray-600">
                     {user?.email}
-                  </div>
-                  <p className="mt-2 text-sm text-gray-500">
+                  </dd>
+                  <dd className="mt-2 text-sm text-gray-500 px-2 py-1">
                     Email address cannot be changed. Contact support if needed.
-                  </p>
-                </div>
+                  </dd>
+                </dl>
 
                 {/* Success/Error Messages */}
                 {success && (
@@ -579,7 +579,7 @@ const ProfileSettingsPage = () => {
             <div className="flex justify-center space-x-4">
               <Link
                 href="/"
-                className="inline-flex items-center px-6 py-3 bg-white text-gray-700 border-2 border-gray-200 font-semibold rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md"
+                className="inline-flex items-center px-4 py-2 bg-white text-gray-700 border-2 border-gray-200 font-semibold rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md text-lg"
               >
                 <svg
                   className="w-5 h-5 mr-2"
@@ -598,7 +598,7 @@ const ProfileSettingsPage = () => {
               </Link>
               <Link
                 href={`/profile/${user?.uid}`}
-                className="inline-flex items-center px-6 py-3 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center px-4 py-2 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-lg hover:shadow-xl text-lg"
               >
                 <svg
                   className="w-5 h-5 mr-2"
