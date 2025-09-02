@@ -33,45 +33,137 @@ const ResetPassword = () => {
   };
 
   return (
-    <main className="container-center">
-      <div className="card">
-        <h1 className="title-lg">Reset your password</h1>
-        <p className="text-muted mt-2 text-center">
-          Enter the email address you registered with and we&apos;ll send you
-          instructions to reset your password.
-        </p>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-6">
+      <div className="w-full max-w-md">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+            Reset Password
+          </h1>
+          <p className="text-lg text-gray-600">
+            Enter your email to receive a password reset link
+          </p>
+        </div>
 
-        <form className="form mt-5" onSubmit={handleSubmit(onSubmit)}>
-          {errors.root?.message && (
-            <div className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700">
-              {errors.root.message}
+        {/* Reset Password Form */}
+        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Email Input */}
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-semibold text-gray-900 mb-3"
+              >
+                Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white"
+                placeholder="Enter your email..."
+              />
             </div>
-          )}
-          {info && (
-            <div className="rounded-md border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-700">
-              {info}
-            </div>
-          )}
-          <TextInput
-            label="Email address"
-            type="email"
-            placeholder="your.email@example.com"
-            {...register("email", { required: "Email is required" })}
-            error={errors.email?.message}
-          />
 
-          <Button type="submit" disabled={isSubmitting}>
-            Send Reset Instructions
-          </Button>
-        </form>
+            {/* Success Message */}
+            {success && (
+              <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+                <div className="flex items-center space-x-3">
+                  <svg
+                    className="w-5 h-5 text-green-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <p className="text-green-800 text-sm font-medium">
+                    {success}
+                  </p>
+                </div>
+              </div>
+            )}
 
-        <div className="mt-3.5 text-center text-sm">
-          <Link href="/login" className="text-blue-600 hover:underline">
-            Back to Login
-          </Link>
+            {/* Error Message */}
+            {error && (
+              <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+                <div className="flex items-center space-x-3">
+                  <svg
+                    className="w-5 h-5 text-red-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                  <p className="text-red-800 text-sm font-medium">{error}</p>
+                </div>
+              </div>
+            )}
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+            >
+              {isLoading ? (
+                <>
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
+                  </svg>
+                  Sending...
+                </>
+              ) : (
+                "Send Reset Link"
+              )}
+            </button>
+          </form>
+
+          {/* Back to Login Link */}
+          <div className="mt-8 text-center">
+            <p className="text-gray-600">
+              Remember your password?{" "}
+              <Link
+                href="/login"
+                className="text-blue-600 hover:text-blue-800 font-semibold hover:underline transition-colors"
+              >
+                Back to login
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 
