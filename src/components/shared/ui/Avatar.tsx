@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import React from "react";
 
 export type AvatarProps = {
@@ -35,7 +34,7 @@ const Avatar: React.FC<AvatarProps> = ({
           .join(" ")}
         style={{ width: dimension, height: dimension }}
       >
-        <Image
+        <img
           src={src}
           alt={alt}
           width={dimension}

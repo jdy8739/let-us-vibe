@@ -1,16 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import {
-  doc,
-  getDoc,
-  collection,
-  query,
-  where,
-  orderBy,
-  getDocs,
-  limit,
-} from "firebase/firestore";
+import { useState, useEffect, use } from "react";
+import { collection, query, where, getDocs, limit } from "firebase/firestore";
 import { db, auth } from "@/src/services/firebase";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -38,7 +29,8 @@ interface Post {
   photo?: string;
 }
 
-const UserProfilePage = ({ params }: { params: { uid: string } }) => {
+const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
+  const { uid } = use(params);
   const [user, setUser] = useState<UserProfile | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
@@ -49,13 +41,13 @@ const UserProfilePage = ({ params }: { params: { uid: string } }) => {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        console.log("Fetching profile for UID:", params.uid);
+        console.log("Fetching profile for UID:", uid);
 
         // Check if this is the current user's profile
         const currentUser = auth.currentUser;
         console.log("Current user:", currentUser?.uid);
 
-        if (currentUser && currentUser.uid === params.uid) {
+        if (currentUser && currentUser.uid === uid) {
           console.log("This is current user's profile");
           setIsCurrentUser(true);
           // Use current user data with metadata
@@ -75,7 +67,7 @@ const UserProfilePage = ({ params }: { params: { uid: string } }) => {
           // We'll try to get displayName from their posts
           const postsQuery = query(
             collection(db, "posts"),
-            where("uid", "==", params.uid),
+            where("uid", "==", uid),
             limit(1)
           );
           const postsSnapshot = await getDocs(postsQuery);
@@ -84,7 +76,7 @@ const UserProfilePage = ({ params }: { params: { uid: string } }) => {
             const firstPost = postsSnapshot.docs[0].data();
             console.log("Found post data:", firstPost);
             setUser({
-              uid: params.uid,
+              uid: uid,
               email: null,
               displayName: firstPost.username || "User",
               photoURL: null,
@@ -93,7 +85,7 @@ const UserProfilePage = ({ params }: { params: { uid: string } }) => {
           } else {
             console.log("No posts found for this user");
             setUser({
-              uid: params.uid,
+              uid: uid,
               email: null,
               displayName: "User",
               photoURL: null,
@@ -103,10 +95,10 @@ const UserProfilePage = ({ params }: { params: { uid: string } }) => {
         }
 
         // Fetch posts by this user
-        console.log("Fetching posts for UID:", params.uid);
+        console.log("Fetching posts for UID:", uid);
         const postsQuery = query(
           collection(db, "posts"),
-          where("uid", "==", params.uid)
+          where("uid", "==", uid)
           // Removed orderBy to avoid index requirement
         );
 
@@ -149,7 +141,7 @@ const UserProfilePage = ({ params }: { params: { uid: string } }) => {
     });
 
     return () => unsubscribe();
-  }, [params.uid, router]);
+  }, [uid, router]);
 
   const formatDate = (timestamp: Timestamp | string) => {
     if (!timestamp || timestamp === "Unknown") return "Unknown date";
