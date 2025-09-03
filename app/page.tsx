@@ -130,11 +130,17 @@ const HomePage = () => {
     return (
       <div className="min-h-screen bg-gray-50">
         <main className="max-w-4xl mx-auto px-12 py-20">
-          <h1 className="text-3xl font-semibold text-gray-900 mb-12 py-6 px-4">
+          <h1
+            style={{ padding: "1.5rem 1rem" }}
+            className="text-3xl font-semibold text-gray-900 mb-12"
+          >
             My Journal Posts
           </h1>
           <div className="text-center py-16 px-8">
-            <div className="text-gray-600 py-4 px-6 text-lg">
+            <div
+              style={{ padding: "1rem 1.5rem" }}
+              className="text-gray-600 text-lg"
+            >
               Loading posts...
             </div>
           </div>
@@ -150,11 +156,12 @@ const HomePage = () => {
 
         {/* Action Bar */}
         <div className="mb-16 sm:mb-20 lg:mb-24">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+          <div className="flex flex-col sm:flex-row items-center justify-end gap-4 sm:gap-6">
             {currentUser && (
               <Link
                 href={`/profile/${currentUser.uid}`}
-                className="group inline-flex items-center px-8 py-4 bg-white/80 backdrop-blur-sm text-gray-700 border-2 border-gray-200/50 rounded-2xl hover:bg-white hover:border-gray-300 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 font-medium text-lg shadow-md"
+                style={{ padding: "1rem 2rem" }}
+                className="group inline-flex items-center bg-white/80 backdrop-blur-sm text-gray-700 border-2 border-gray-200/50 rounded-2xl hover:bg-white hover:border-gray-300 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 font-medium text-lg shadow-md"
               >
                 <svg
                   className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform duration-200"
@@ -169,12 +176,13 @@ const HomePage = () => {
                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                   />
                 </svg>
-                View Profile
+                <span style={{ padding: "0.5rem" }}>View Profile</span>
               </Link>
             )}
             <Link
               href="/new-post"
-              className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-2xl hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 text-lg shadow-lg"
+              style={{ padding: "1rem 2rem" }}
+              className="group inline-flex items-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-2xl hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 text-lg shadow-lg"
             >
               <svg
                 className="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-200"
@@ -189,68 +197,93 @@ const HomePage = () => {
                   d="M12 4v16m8-8H4"
                 />
               </svg>
-              Create New Post
+              <span style={{ padding: "0.5rem" }}>Create New Post</span>
             </Link>
           </div>
         </div>
 
         {posts.length === 0 ? (
           <div className="relative">
-            <div className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 text-center py-20 sm:py-24 lg:py-32 px-8 sm:px-12 lg:px-20 mx-auto max-w-4xl">
+            <div className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 py-20 sm:py-24 lg:py-32 px-8 sm:px-12 lg:px-20 mx-auto max-w-4xl">
               {/* Decorative background elements */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 rounded-3xl"></div>
               <div className="absolute top-8 left-8 w-20 h-20 bg-blue-100/30 rounded-full blur-xl"></div>
               <div className="absolute bottom-8 right-8 w-32 h-32 bg-indigo-100/30 rounded-full blur-xl"></div>
 
               <div className="relative z-10">
-                <div className="w-28 h-28 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full mx-auto mb-8 flex items-center justify-center shadow-lg">
-                  <svg
-                    className="w-14 h-14 text-blue-600"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                <div className="text-center">
+                  <div className="w-28 h-28 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full mx-auto mb-8 flex items-center justify-center shadow-lg">
+                    <svg
+                      className="w-14 h-14 text-blue-600"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
+                    </svg>
+                  </div>
+
+                  <h3
+                    style={{ padding: "1rem 0 1.5rem 0" }}
+                    className="text-3xl sm:text-4xl font-bold text-gray-900"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                    />
-                  </svg>
+                    <span
+                      style={{ padding: "0.5rem" }}
+                      className="bg-gradient-to-r from-gray-900 to-blue-800 bg-clip-text text-transparent"
+                    >
+                      No posts yet
+                    </span>
+                  </h3>
+
+                  <p
+                    style={{ padding: "1rem", marginBottom: "3rem" }}
+                    className="text-gray-600 max-w-md mx-auto text-lg leading-relaxed"
+                  >
+                    <span style={{ padding: "0.5rem" }}>
+                      Start your journaling journey by creating your first post
+                    </span>
+                    <span
+                      style={{
+                        padding: "0.5rem 0.5rem 0 0.5rem",
+                        display: "block",
+                        marginTop: "0.5rem",
+                      }}
+                      className="text-base text-gray-500"
+                    >
+                      Share your thoughts, experiences, and memories
+                    </span>
+                  </p>
                 </div>
 
-                <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-                  <span className="bg-gradient-to-r from-gray-900 to-blue-800 bg-clip-text text-transparent">
-                    No posts yet
-                  </span>
-                </h3>
-
-                <p className="text-gray-600 mb-12 max-w-md mx-auto text-lg leading-relaxed">
-                  Start your journaling journey by creating your first post
-                  <span className="block mt-2 text-base text-gray-500">
-                    Share your thoughts, experiences, and memories
-                  </span>
-                </p>
-
-                <Link
-                  href="/new-post"
-                  className="group inline-flex items-center px-10 py-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-2xl hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-lg shadow-lg"
-                >
-                  <svg
-                    className="w-6 h-6 mr-3 group-hover:rotate-90 transition-transform duration-200"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                <div className="flex justify-end">
+                  <Link
+                    href="/new-post"
+                    style={{ padding: "1.25rem 2.5rem" }}
+                    className="group inline-flex items-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-2xl hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-lg shadow-lg"
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 4v16m8-8H4"
-                    />
-                  </svg>
-                  Create Your First Post
-                </Link>
+                    <svg
+                      className="w-6 h-6 mr-3 group-hover:rotate-90 transition-transform duration-200"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 4v16m8-8H4"
+                      />
+                    </svg>
+                    <span style={{ padding: "0.5rem" }}>
+                      Create Your First Post
+                    </span>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -259,8 +292,9 @@ const HomePage = () => {
             {posts.map((post, index) => (
               <article
                 key={post.id}
-                className="p-6 group relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 overflow-hidden hover:shadow-xl hover:bg-white hover:-translate-y-1 transition-all duration-300"
+                className="group relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 overflow-hidden hover:shadow-xl hover:bg-white hover:-translate-y-1 transition-all duration-300"
                 style={{
+                  padding: "1.75rem", // px-7, py-7 = 1.75rem
                   animationDelay: `${index * 100}ms`,
                   animation: "fadeInUp 0.6s ease-out forwards",
                 }}
@@ -271,11 +305,14 @@ const HomePage = () => {
                 {/* Post Header */}
                 <div className="p-8 sm:p-12 lg:p-16 pb-6 sm:pb-8 lg:pb-12">
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-6 sm:gap-10 mb-8 sm:mb-10">
-                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight flex-1 group-hover:text-blue-900 transition-colors duration-300">
+                    <h2 className="p-7 text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight flex-1 group-hover:text-blue-900 transition-colors duration-300">
                       {post.title}
                     </h2>
                     <div className="flex-shrink-0">
-                      <div className="inline-flex items-center text-sm text-gray-500 bg-gradient-to-r from-gray-50 to-blue-50 px-4 sm:px-6 py-2 sm:py-3 rounded-xl border border-gray-200/50 font-medium shadow-sm">
+                      <div
+                        style={{ padding: "0.5rem 1.5rem" }}
+                        className="inline-flex items-center text-sm text-gray-500 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl border border-gray-200/50 font-medium shadow-sm"
+                      >
                         <svg
                           className="w-4 h-4 mr-2 text-gray-400"
                           fill="none"
@@ -289,23 +326,32 @@ const HomePage = () => {
                             d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                           />
                         </svg>
-                        {formatDate(post.createdAt)}
+                        <span style={{ padding: "0.25rem" }}>
+                          {formatDate(post.createdAt)}
+                        </span>
                       </div>
                     </div>
                   </div>
 
                   {/* Author Info */}
-                  <div className="flex items-center gap-4 sm:gap-6 mb-8 sm:mb-10 p-4 sm:p-6 bg-gradient-to-r from-gray-50/50 to-blue-50/50 rounded-2xl border border-gray-100/50">
+                  <div
+                    style={{ padding: "1rem" }}
+                    className="flex items-center gap-4 sm:gap-6 mb-8 sm:mb-10 p-4 sm:p-6 bg-gradient-to-r from-gray-50/50 to-blue-50/50 rounded-2xl border border-gray-100/50"
+                  >
                     <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-blue-100 to-indigo-200 flex items-center justify-center text-blue-800 text-lg sm:text-xl font-bold shadow-lg ring-4 ring-white/50">
                       {post.username.charAt(0).toUpperCase()}
                     </div>
-                    <div className="flex-1">
-                      <div className="text-xs sm:text-sm text-gray-500 mb-1 font-medium uppercase tracking-wide">
+                    <div style={{ padding: "1rem" }} className="flex-1">
+                      <div
+                        style={{ padding: "0.25rem 0 0.25rem 0" }}
+                        className="text-xs sm:text-sm text-gray-500 mb-1 font-medium uppercase tracking-wide"
+                      >
                         Author
                       </div>
                       <Link
                         href={`/profile/${post.uid}`}
-                        className="text-gray-900 hover:text-blue-700 font-semibold transition-all duration-200 text-lg sm:text-xl px-2 py-1 rounded-lg hover:bg-white/80 hover:shadow-sm"
+                        style={{ padding: "0.25rem 0.5rem" }}
+                        className="text-gray-900 hover:text-blue-700 font-semibold transition-all duration-200 text-lg sm:text-xl rounded-lg hover:bg-white/80 hover:shadow-sm"
                       >
                         {post.username}
                       </Link>
@@ -316,7 +362,10 @@ const HomePage = () => {
                 {/* Image Display */}
                 {post.photo && (
                   <div className="px-8 sm:px-12 lg:px-16 pb-8 sm:pb-12 lg:pb-14">
-                    <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-gray-50 to-blue-50 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
+                    <div
+                      style={{ padding: "1rem" }}
+                      className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-gray-50 to-blue-50 shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                    >
                       <img
                         src={post.photo}
                         alt={post.title}
@@ -330,7 +379,10 @@ const HomePage = () => {
                 {/* Post Content */}
                 <div className="px-8 sm:px-12 lg:px-16 pb-8 sm:pb-12 lg:pb-16">
                   <div className="bg-gradient-to-r from-gray-50/50 to-blue-50/50 rounded-2xl p-6 sm:p-8 border border-gray-100/50">
-                    <p className="text-gray-700 text-lg sm:text-xl leading-relaxed">
+                    <p
+                      style={{ padding: "1rem" }}
+                      className="text-gray-700 text-lg sm:text-xl leading-relaxed"
+                    >
                       {truncateContent(post.content)}
                     </p>
                   </div>
@@ -341,7 +393,10 @@ const HomePage = () => {
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-6">
                     <div className="flex items-center gap-4">
                       {post.aiReview && (
-                        <span className="inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border border-blue-200/50 shadow-sm">
+                        <span
+                          style={{ padding: "0.5rem 1rem" }}
+                          className="inline-flex items-center rounded-xl text-sm font-semibold bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border border-blue-200/50 shadow-sm"
+                        >
                           <svg
                             className="w-4 h-4 mr-2"
                             fill="currentColor"
@@ -353,7 +408,9 @@ const HomePage = () => {
                               clipRule="evenodd"
                             />
                           </svg>
-                          AI Reviewed
+                          <span style={{ padding: "0.25rem" }}>
+                            AI Reviewed
+                          </span>
                         </span>
                       )}
                     </div>
@@ -363,7 +420,8 @@ const HomePage = () => {
                       <div className="flex items-center gap-3">
                         <Link
                           href={`/edit-post/${post.id}`}
-                          className="group inline-flex items-center px-6 py-3 text-gray-700 hover:text-blue-700 font-medium rounded-xl hover:bg-white/80 hover:shadow-md transition-all duration-200 border border-gray-200/50 hover:border-blue-200"
+                          style={{ padding: "0.75rem 1.5rem" }}
+                          className="group inline-flex items-center text-gray-700 hover:text-blue-700 font-medium rounded-xl hover:bg-white/80 hover:shadow-md transition-all duration-200 border border-gray-200/50 hover:border-blue-200"
                         >
                           <svg
                             className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-200"
@@ -378,12 +436,13 @@ const HomePage = () => {
                               d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                             />
                           </svg>
-                          Edit
+                          <span style={{ padding: "0.25rem" }}>Edit</span>
                         </Link>
                         <button
                           onClick={() => handleDeletePost(post.id, post.uid)}
                           disabled={deletingPostId === post.id}
-                          className="group inline-flex items-center px-6 py-3 text-red-600 hover:text-red-700 font-medium rounded-xl hover:bg-red-50/80 hover:shadow-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-red-200/50 hover:border-red-300"
+                          style={{ padding: "0.75rem 1.5rem" }}
+                          className="group inline-flex items-center text-red-600 hover:text-red-700 font-medium rounded-xl hover:bg-red-50/80 hover:shadow-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-red-200/50 hover:border-red-300"
                         >
                           <svg
                             className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-200"
@@ -398,9 +457,11 @@ const HomePage = () => {
                               d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                             />
                           </svg>
-                          {deletingPostId === post.id
-                            ? "Deleting..."
-                            : "Delete"}
+                          <span style={{ padding: "0.25rem" }}>
+                            {deletingPostId === post.id
+                              ? "Deleting..."
+                              : "Delete"}
+                          </span>
                         </button>
                       </div>
                     )}

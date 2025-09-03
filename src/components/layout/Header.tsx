@@ -25,32 +25,45 @@ const Header: React.FC = () => {
       : null);
 
   return (
-    <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/60 bg-white/80 border-b border-gray-200 px-12 py-6">
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-4 sm:py-6 flex items-center justify-between">
+    <header
+      style={{ padding: "3rem 3rem 1.5rem 3rem" }}
+      className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/60 bg-white/80 border-b border-gray-200"
+    >
+      <div
+        style={{ padding: "1rem 1.5rem" }}
+        className="max-w-6xl mx-auto flex items-center justify-between"
+      >
         <Link
           href="/"
-          className="text-2xl font-bold tracking-tight text-gray-900 px-3 py-2"
+          style={{ padding: "0.75rem 0.75rem" }}
+          className="text-2xl font-bold tracking-tight text-gray-900"
         >
           Journal
         </Link>
-        <nav className="flex items-center gap-6 sm:gap-8 px-2 py-2">
+        <nav
+          style={{ padding: "0.5rem", gap: "1.5rem 2rem" }}
+          className="flex items-center"
+        >
           {currentUser ? (
             <>
               <Link
                 href={`/profile/${currentUser.uid}`}
-                className="hidden sm:inline-flex items-center px-4 py-2 rounded-xl border-2 border-gray-200 text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-300 transition-all text-lg font-medium"
+                style={{ padding: "0.5rem 1rem" }}
+                className="hidden sm:inline-flex items-center rounded-xl border-2 border-gray-200 text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-300 transition-all text-lg font-medium"
               >
-                Profile
+                <span style={{ padding: "0.25rem" }}>Profile</span>
               </Link>
               <Link
                 href="/new-post"
-                className="inline-flex items-center px-4 py-2 rounded-xl bg-gray-900 text-white hover:bg-gray-800 transition-all text-lg font-semibold"
+                style={{ padding: "0.5rem 1rem" }}
+                className="inline-flex items-center rounded-xl bg-gray-900 text-white hover:bg-gray-800 transition-all text-lg font-semibold"
               >
-                New Post
+                <span style={{ padding: "0.25rem" }}>New Post</span>
               </Link>
               <button
                 onClick={handleLogout}
-                className="inline-flex items-center px-4 py-2 rounded-xl border-2 border-red-200 text-red-600 bg-white hover:bg-red-50 hover:border-red-300 transition-all text-lg font-medium"
+                style={{ padding: "0.5rem 1rem" }}
+                className="inline-flex items-center rounded-xl border-2 border-red-200 text-red-600 bg-white hover:bg-red-50 hover:border-red-300 transition-all text-lg font-medium"
               >
                 <svg
                   className="w-4 h-4 mr-2"
@@ -65,22 +78,24 @@ const Header: React.FC = () => {
                     d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
                   />
                 </svg>
-                Logout
+                <span style={{ padding: "0.25rem" }}>Logout</span>
               </button>
             </>
           ) : (
             <>
               <Link
                 href="/login"
-                className="inline-flex items-center px-4 py-2 rounded-xl border-2 border-gray-200 text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-300 transition-all text-lg font-medium"
+                style={{ padding: "0.5rem 1rem" }}
+                className="inline-flex items-center rounded-xl border-2 border-gray-200 text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-300 transition-all text-lg font-medium"
               >
-                Login
+                <span style={{ padding: "0.25rem" }}>Login</span>
               </Link>
               <Link
                 href="/signup"
-                className="inline-flex items-center px-4 py-2 rounded-xl bg-gray-900 text-white hover:bg-gray-800 transition-all text-lg font-semibold"
+                style={{ padding: "0.5rem 1rem" }}
+                className="inline-flex items-center rounded-xl bg-gray-900 text-white hover:bg-gray-800 transition-all text-lg font-semibold"
               >
-                Sign Up
+                <span style={{ padding: "0.25rem" }}>Sign Up</span>
               </Link>
             </>
           )}

@@ -205,12 +205,21 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <main className="max-w-5xl mx-auto px-6 py-16">
+      <main style={{ padding: "4rem 1.5rem" }} className="max-w-5xl mx-auto">
         {/* User Profile Header */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-10">
-          <div className="flex items-center justify-between gap-6">
-            <div className="flex items-center gap-5">
-              <div className="relative">
+        <div
+          style={{ padding: "2rem", marginBottom: "2.5rem" }}
+          className="bg-white rounded-xl shadow-sm border border-gray-200"
+        >
+          <div
+            style={{ padding: "1rem", gap: "1.5rem" }}
+            className="flex items-center justify-between"
+          >
+            <div
+              style={{ padding: "0.5rem", gap: "1.25rem" }}
+              className="flex items-center"
+            >
+              <div style={{ padding: "0.5rem" }} className="relative">
                 <Avatar
                   src={user.photoURL || undefined}
                   initials={user.displayName || "U"}
@@ -218,11 +227,17 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
                 />
                 <span className="absolute -bottom-1 -right-1 block w-4 h-4 rounded-full bg-green-500 ring-2 ring-white" />
               </div>
-              <div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">
+              <div style={{ padding: "0.5rem" }}>
+                <h1
+                  style={{ padding: "0.5rem 0" }}
+                  className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight"
+                >
                   {user.displayName || "User"}
                 </h1>
-                <div className="mt-1 flex items-center gap-2 text-sm text-gray-600">
+                <div
+                  style={{ padding: "0.25rem 0", gap: "0.5rem" }}
+                  className="mt-1 flex items-center text-sm text-gray-600"
+                >
                   {user.email && <span>{user.email}</span>}
                   {user.emailVerified && (
                     <Badge tone="green" size="sm">
@@ -306,12 +321,21 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
 
         {/* User Account Information - Only for Current User */}
         {isCurrentUser && (
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-10">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+          <div
+            style={{ padding: "2rem", marginBottom: "2.5rem" }}
+            className="bg-white rounded-xl shadow-sm border border-gray-200"
+          >
+            <h2
+              style={{ padding: "1rem 0 1.5rem 0" }}
+              className="text-2xl font-bold text-gray-900 text-center"
+            >
               Account Information
             </h2>
 
-            <dl className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <dl
+              style={{ padding: "1rem", gap: "1.5rem" }}
+              className="grid grid-cols-1 md:grid-cols-2"
+            >
               <div className="space-y-5">
                 <div>
                   <dt className="text-xs font-semibold text-gray-700 mb-2 uppercase tracking-wide px-2 py-1">
@@ -420,12 +444,21 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
         )}
 
         {/* User's Posts */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-          <div className="mb-6 text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+        <div
+          style={{ padding: "2rem" }}
+          className="bg-white rounded-xl shadow-sm border border-gray-200"
+        >
+          <div
+            style={{ padding: "1rem", marginBottom: "1.5rem" }}
+            className="text-center"
+          >
+            <h2
+              style={{ padding: "0.5rem 0" }}
+              className="text-2xl font-bold text-gray-900 mb-2"
+            >
               Posts by {user.displayName || "User"}
             </h2>
-            <p className="text-sm text-gray-600">
+            <p style={{ padding: "0.5rem" }} className="text-sm text-gray-600">
               {posts.length} post{posts.length !== 1 ? "s" : ""} found
             </p>
           </div>

@@ -47,10 +47,13 @@ const Login = () => {
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+          <h1
+            style={{ padding: "1rem 0" }}
+            className="text-4xl font-bold text-gray-900 mb-4 tracking-tight"
+          >
             Welcome Back
           </h1>
-          <p className="text-lg text-gray-600">
+          <p style={{ padding: "0.5rem" }} className="text-lg text-gray-600">
             Sign in to your journal account
           </p>
         </div>
@@ -62,7 +65,8 @@ const Login = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-semibold text-gray-900 mb-3"
+                style={{ padding: "0.5rem 0 0.75rem 0" }}
+                className="block text-sm font-semibold text-gray-900"
               >
                 Email Address
               </label>
@@ -74,7 +78,10 @@ const Login = () => {
                 placeholder="Enter your email..."
               />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600">
+                <p
+                  style={{ padding: "0.25rem 0" }}
+                  className="mt-1 text-sm text-red-600"
+                >
                   {errors.email.message}
                 </p>
               )}
@@ -84,7 +91,8 @@ const Login = () => {
             <div>
               <label
                 htmlFor="password"
-                className="block text-sm font-semibold text-gray-900 mb-3"
+                style={{ padding: "0.5rem 0 0.75rem 0" }}
+                className="block text-sm font-semibold text-gray-900"
               >
                 Password
               </label>
@@ -96,7 +104,10 @@ const Login = () => {
                 placeholder="Enter your password..."
               />
               {errors.password && (
-                <p className="mt-1 text-sm text-red-600">
+                <p
+                  style={{ padding: "0.25rem 0" }}
+                  className="mt-1 text-sm text-red-600"
+                >
                   {errors.password.message}
                 </p>
               )}
@@ -119,7 +130,10 @@ const Login = () => {
                       d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <p className="text-red-800 text-sm font-medium">
+                  <p
+                    style={{ padding: "0.25rem" }}
+                    className="text-red-800 text-sm font-medium"
+                  >
                     {errors.root.message}
                   </p>
                 </div>
@@ -130,7 +144,8 @@ const Login = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              style={{ padding: "0.75rem 1rem" }}
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
               {isSubmitting ? (
                 <>
@@ -154,10 +169,10 @@ const Login = () => {
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                     ></path>
                   </svg>
-                  Signing In...
+                  <span style={{ padding: "0.25rem" }}>Signing In...</span>
                 </>
               ) : (
-                "Sign In"
+                <span style={{ padding: "0.25rem" }}>Sign In</span>
               )}
             </button>
           </form>
@@ -169,7 +184,10 @@ const Login = () => {
                 <div className="w-full border-t border-gray-200"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">
+                <span
+                  style={{ padding: "0 0.5rem" }}
+                  className="bg-white text-gray-500"
+                >
                   Or continue with
                 </span>
               </div>
@@ -184,12 +202,13 @@ const Login = () => {
           />
 
           {/* Sign Up Link */}
-          <div className="mt-8 text-center">
-            <p className="text-gray-600">
+          <div className="mt-8 text-right">
+            <p style={{ padding: "0.5rem" }} className="text-gray-600">
               Don&apos;t have an account?{" "}
               <Link
                 href="/signup"
-                className="text-blue-600 hover:text-blue-800 font-semibold hover:underline transition-colors px-2 py-1 rounded hover:bg-blue-50"
+                style={{ padding: "0.25rem 0.5rem" }}
+                className="text-blue-600 hover:text-blue-800 font-semibold hover:underline transition-colors rounded hover:bg-blue-50"
               >
                 Sign up
               </Link>

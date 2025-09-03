@@ -91,25 +91,39 @@ const NewPostPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <main className="max-w-4xl mx-auto px-6 py-16">
+      <main style={{ padding: "4rem 1.5rem" }} className="max-w-4xl mx-auto">
         {/* Header Section */}
-        <div className="mb-10">
-          <h1 className="text-4xl font-bold text-gray-900 tracking-tight">
+        <div style={{ padding: "1rem", marginBottom: "2.5rem" }}>
+          <h1
+            style={{ padding: "1rem 0" }}
+            className="text-4xl font-bold text-gray-900 tracking-tight"
+          >
             Create New Post
           </h1>
-          <p className="mt-2 text-base text-gray-600 max-w-3xl">
+          <p
+            style={{ padding: "0.5rem 0" }}
+            className="mt-2 text-base text-gray-600 max-w-3xl"
+          >
             Share your thoughts and experiences with the world.
           </p>
         </div>
 
         {/* Form Container */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <div
+          style={{ padding: "2rem" }}
+          className="bg-white rounded-xl shadow-sm border border-gray-200"
+        >
+          <form
+            onSubmit={handleSubmit}
+            style={{ padding: "1rem", gap: "1.5rem" }}
+            className="space-y-6"
+          >
             {/* Title Input */}
-            <div>
+            <div style={{ padding: "1rem" }}>
               <label
                 htmlFor="title"
-                className="block text-sm font-semibold text-gray-900 mb-2.5"
+                style={{ padding: "0.5rem 0 0.625rem 0" }}
+                className="block text-sm font-semibold text-gray-900"
               >
                 Post Title
               </label>
@@ -125,10 +139,11 @@ const NewPostPage = () => {
             </div>
 
             {/* Content Input */}
-            <div>
+            <div style={{ padding: "1rem" }}>
               <label
                 htmlFor="content"
-                className="block text-sm font-semibold text-gray-900 mb-2.5"
+                style={{ padding: "0.5rem 0 0.625rem 0" }}
+                className="block text-sm font-semibold text-gray-900"
               >
                 Post Content
               </label>
@@ -144,8 +159,11 @@ const NewPostPage = () => {
             </div>
 
             {/* Image Upload */}
-            <div>
-              <label className="block text-sm font-semibold text-gray-900 mb-2.5">
+            <div style={{ padding: "1rem" }}>
+              <label
+                style={{ padding: "0.5rem 0 0.625rem 0" }}
+                className="block text-sm font-semibold text-gray-900"
+              >
                 Add Image (Optional)
               </label>
               <div className="space-y-4">

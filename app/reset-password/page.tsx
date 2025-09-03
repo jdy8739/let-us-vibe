@@ -36,23 +36,37 @@ const ResetPassword = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-6">
       <div className="w-full max-w-md">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+        <div
+          style={{ padding: "1rem", marginBottom: "3rem" }}
+          className="text-center"
+        >
+          <h1
+            style={{ padding: "1rem 0" }}
+            className="text-4xl font-bold text-gray-900 mb-4 tracking-tight"
+          >
             Reset Password
           </h1>
-          <p className="text-lg text-gray-600">
+          <p style={{ padding: "0.5rem" }} className="text-lg text-gray-600">
             Enter your email to receive a password reset link
           </p>
         </div>
 
         {/* Reset Password Form */}
-        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <div
+          style={{ padding: "2rem" }}
+          className="bg-white rounded-3xl shadow-sm border border-gray-100"
+        >
+          <form
+            onSubmit={handleSubmit}
+            style={{ padding: "1rem", gap: "1.5rem" }}
+            className="space-y-6"
+          >
             {/* Email Input */}
-            <div>
+            <div style={{ padding: "1rem" }}>
               <label
                 htmlFor="email"
-                className="block text-sm font-semibold text-gray-900 mb-3"
+                style={{ padding: "0.5rem 0 0.75rem 0" }}
+                className="block text-sm font-semibold text-gray-900"
               >
                 Email Address
               </label>
@@ -150,7 +164,7 @@ const ResetPassword = () => {
           </form>
 
           {/* Back to Login Link */}
-          <div className="mt-8 text-center">
+          <div className="mt-8 text-right">
             <p className="text-gray-600">
               Remember your password?{" "}
               <Link

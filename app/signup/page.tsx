@@ -46,22 +46,33 @@ const Signup = () => {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-6">
       <div className="w-full max-w-md">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+        <div style={{ padding: "1rem" }} className="text-center mb-12">
+          <h1
+            style={{ padding: "1rem" }}
+            className="text-4xl font-bold text-gray-900 mb-4 tracking-tight"
+          >
             Create Account
           </h1>
-          <p className="text-lg text-gray-600">
+          <p style={{ padding: "0.5rem" }} className="text-lg text-gray-600">
             Start your journaling journey today
           </p>
         </div>
 
         {/* Signup Form */}
-        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <div
+          style={{ padding: "2rem" }}
+          className="bg-white rounded-3xl shadow-sm border border-gray-100"
+        >
+          <form
+            onSubmit={handleSubmit}
+            style={{ padding: "1rem" }}
+            className="space-y-6"
+          >
             {/* Display Name Input */}
-            <div>
+            <div style={{ padding: "0.75rem" }}>
               <label
                 htmlFor="displayName"
+                style={{ padding: "0.5rem 0" }}
                 className="block text-sm font-semibold text-gray-900 mb-3"
               >
                 Display Name
@@ -78,9 +89,10 @@ const Signup = () => {
             </div>
 
             {/* Email Input */}
-            <div>
+            <div style={{ padding: "0.75rem" }}>
               <label
                 htmlFor="email"
+                style={{ padding: "0.5rem 0" }}
                 className="block text-sm font-semibold text-gray-900 mb-3"
               >
                 Email Address
@@ -97,9 +109,10 @@ const Signup = () => {
             </div>
 
             {/* Password Input */}
-            <div>
+            <div style={{ padding: "0.75rem" }}>
               <label
                 htmlFor="password"
+                style={{ padding: "0.5rem 0" }}
                 className="block text-sm font-semibold text-gray-900 mb-3"
               >
                 Password
@@ -117,8 +130,14 @@ const Signup = () => {
 
             {/* Error Message */}
             {error && (
-              <div className="bg-red-50 border border-red-200 rounded-xl p-4">
-                <div className="flex items-center space-x-3">
+              <div
+                style={{ padding: "1rem" }}
+                className="bg-red-50 border border-red-200 rounded-xl"
+              >
+                <div
+                  style={{ padding: "0.5rem" }}
+                  className="flex items-center space-x-3"
+                >
                   <svg
                     className="w-5 h-5 text-red-600"
                     fill="none"
@@ -132,7 +151,12 @@ const Signup = () => {
                       d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <p className="text-red-800 text-sm font-medium">{error}</p>
+                  <p
+                    style={{ padding: "0.25rem" }}
+                    className="text-red-800 text-sm font-medium"
+                  >
+                    {error}
+                  </p>
                 </div>
               </div>
             )}
@@ -174,13 +198,19 @@ const Signup = () => {
           </form>
 
           {/* Divider */}
-          <div className="my-6">
-            <div className="relative">
+          <div style={{ padding: "1.5rem 0" }} className="my-6">
+            <div style={{ padding: "0.5rem" }} className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-200"></div>
               </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">
+              <div
+                style={{ padding: "0.5rem" }}
+                className="relative flex justify-center text-sm"
+              >
+                <span
+                  style={{ padding: "0 0.5rem" }}
+                  className="bg-white text-gray-500"
+                >
                   Or continue with
                 </span>
               </div>
@@ -204,8 +234,8 @@ const Signup = () => {
           </button>
 
           {/* Sign In Link */}
-          <div className="mt-8 text-center">
-            <p className="text-gray-600">
+          <div style={{ padding: "2rem 0 0 0" }} className="mt-8 text-right">
+            <p style={{ padding: "0.5rem" }} className="text-gray-600">
               Already have an account?{" "}
               <Link
                 href="/login"

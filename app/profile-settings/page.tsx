@@ -214,13 +214,19 @@ const ProfileSettingsPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <main className="max-w-4xl mx-auto px-6 py-16">
+      <main style={{ padding: "4rem 1.5rem" }} className="max-w-4xl mx-auto">
         {/* Header Section */}
-        <div className="mb-10">
-          <h1 className="text-4xl font-bold text-gray-900 tracking-tight">
+        <div style={{ padding: "1rem", marginBottom: "2.5rem" }}>
+          <h1
+            style={{ padding: "1rem 0" }}
+            className="text-4xl font-bold text-gray-900 tracking-tight"
+          >
             Profile Settings
           </h1>
-          <p className="mt-2 text-base text-gray-600">
+          <p
+            style={{ padding: "0.5rem 0" }}
+            className="mt-2 text-base text-gray-600"
+          >
             Manage your profile information and account settings.
           </p>
         </div>
@@ -233,7 +239,10 @@ const ProfileSettingsPage = () => {
         ) : (
           <div className="space-y-8">
             {/* Profile Update Section */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
+            <div
+              style={{ padding: "2rem" }}
+              className="bg-white rounded-xl shadow-sm border border-gray-200"
+            >
               <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
                 Update Profile
               </h2>
@@ -427,7 +436,7 @@ const ProfileSettingsPage = () => {
                 )}
 
                 {/* Update Button */}
-                <div className="flex justify-center pt-6 border-t border-gray-200">
+                <div className="flex justify-end pt-6 border-t border-gray-200">
                   <button
                     type="submit"
                     disabled={isUpdating}
@@ -481,7 +490,10 @@ const ProfileSettingsPage = () => {
             </div>
 
             {/* Danger Zone */}
-            <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-12">
+            <div
+              style={{ padding: "3rem" }}
+              className="bg-white rounded-3xl shadow-sm border border-gray-100"
+            >
               <div className="text-center mb-8">
                 <div className="w-16 h-16 bg-red-100 rounded-full mx-auto mb-4 flex items-center justify-center">
                   <svg
@@ -522,7 +534,7 @@ const ProfileSettingsPage = () => {
                   </p>
                 </div>
 
-                <div className="flex justify-center">
+                <div className="flex justify-end">
                   <button
                     onClick={handleDeleteAccount}
                     disabled={isDeleting}
@@ -576,7 +588,7 @@ const ProfileSettingsPage = () => {
             </div>
 
             {/* Navigation Links */}
-            <div className="flex justify-center space-x-4">
+            <div className="flex justify-end space-x-4">
               <Link
                 href="/"
                 className="inline-flex items-center px-4 py-2 bg-white text-gray-700 border-2 border-gray-200 font-semibold rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md text-lg"
