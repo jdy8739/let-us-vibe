@@ -5,12 +5,14 @@ import { useForm } from "react-hook-form";
 import { auth } from "@/src/services/firebase";
 import { signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/src/contexts/AuthContext";
 import Link from "next/link";
 
 type LoginFormValues = { email: string; password: string };
 
 const Login = () => {
   const router = useRouter();
+  const { loading } = useAuth();
   const {
     register,
     handleSubmit,
@@ -30,6 +32,7 @@ const Login = () => {
         displayName: credential.user.displayName,
       });
 
+      // AuthContext가 자동으로 로컬스토리지에 저장하므로 별도 처리 불필요
       router.push("/");
     } catch (err: unknown) {
       setError("root", {

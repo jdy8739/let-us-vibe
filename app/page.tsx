@@ -11,7 +11,8 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
-import { db, auth, storage } from "@/src/services/firebase";
+import { db, storage } from "@/src/services/firebase";
+import { useAuth } from "@/src/contexts/AuthContext";
 import Link from "next/link";
 
 interface Post {
@@ -26,9 +27,13 @@ interface Post {
 }
 
 const HomePage = () => {
+  const { user, userData } = useAuth();
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [deletingPostId, setDeletingPostId] = useState<string | null>(null);
+
+  // 현재 사용자 정보 (Firebase user 또는 로컬스토리지 userData)
+  const currentUser = user || (userData ? { uid: userData.uid } : null);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -53,12 +58,12 @@ const HomePage = () => {
   }, []);
 
   const handleDeletePost = async (postId: string, postUid: string) => {
-    if (!auth.currentUser) {
+    if (!currentUser) {
       alert("Please login to delete posts");
       return;
     }
 
-    if (auth.currentUser.uid !== postUid) {
+    if (currentUser.uid !== postUid) {
       alert("You can only delete your own posts");
       return;
     }
@@ -139,28 +144,20 @@ const HomePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-      <main className="max-w-5xl mx-auto px-12 py-24">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+      <main className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-16 sm:py-20 lg:py-28">
         {/* Header Section */}
-        <div className="mb-20 py-12 px-4">
-          <h1 className="text-4xl font-bold text-gray-900 tracking-tight py-6 px-4">
-            My Journal Posts
-          </h1>
-          <p className="mt-6 text-base text-gray-600 max-w-3xl py-5 px-4 leading-relaxed">
-            Keep your thoughts organized and look back on moments that matter.
-          </p>
-        </div>
 
         {/* Action Bar */}
-        <div className="mb-20 py-10 px-4">
-          <div className="flex items-center gap-6">
-            {auth.currentUser && (
+        <div className="mb-16 sm:mb-20 lg:mb-24">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+            {currentUser && (
               <Link
-                href={`/profile/${auth.currentUser.uid}`}
-                className="inline-flex items-center px-6 py-3 bg-white text-gray-700 border border-gray-200 rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md font-medium text-lg"
+                href={`/profile/${currentUser.uid}`}
+                className="group inline-flex items-center px-8 py-4 bg-white/80 backdrop-blur-sm text-gray-700 border-2 border-gray-200/50 rounded-2xl hover:bg-white hover:border-gray-300 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 font-medium text-lg shadow-md"
               >
                 <svg
-                  className="w-6 h-6 mr-4"
+                  className="w-5 h-5 mr-3 group-hover:scale-110 transition-transform duration-200"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -172,15 +169,15 @@ const HomePage = () => {
                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                   />
                 </svg>
-                Profile
+                View Profile
               </Link>
             )}
             <Link
               href="/new-post"
-              className="inline-flex items-center px-6 py-3 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md text-lg"
+              className="group inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-2xl hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 text-lg shadow-lg"
             >
               <svg
-                className="w-6 h-6 mr-4"
+                className="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-200"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -192,84 +189,123 @@ const HomePage = () => {
                   d="M12 4v16m8-8H4"
                 />
               </svg>
-              New Post
+              Create New Post
             </Link>
           </div>
         </div>
 
         {posts.length === 0 ? (
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-200 text-center py-32 px-16">
-            <div className="w-24 h-24 bg-gray-100 rounded-full mx-auto mb-10 flex items-center justify-center p-6">
-              <svg
-                className="w-12 h-12 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
+          <div className="relative">
+            <div className="bg-white/70 backdrop-blur-sm rounded-3xl shadow-xl border border-white/20 text-center py-20 sm:py-24 lg:py-32 px-8 sm:px-12 lg:px-20 mx-auto max-w-4xl">
+              {/* Decorative background elements */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-indigo-50/50 rounded-3xl"></div>
+              <div className="absolute top-8 left-8 w-20 h-20 bg-blue-100/30 rounded-full blur-xl"></div>
+              <div className="absolute bottom-8 right-8 w-32 h-32 bg-indigo-100/30 rounded-full blur-xl"></div>
+
+              <div className="relative z-10">
+                <div className="w-28 h-28 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full mx-auto mb-8 flex items-center justify-center shadow-lg">
+                  <svg
+                    className="w-14 h-14 text-blue-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={1.5}
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    />
+                  </svg>
+                </div>
+
+                <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+                  <span className="bg-gradient-to-r from-gray-900 to-blue-800 bg-clip-text text-transparent">
+                    No posts yet
+                  </span>
+                </h3>
+
+                <p className="text-gray-600 mb-12 max-w-md mx-auto text-lg leading-relaxed">
+                  Start your journaling journey by creating your first post
+                  <span className="block mt-2 text-base text-gray-500">
+                    Share your thoughts, experiences, and memories
+                  </span>
+                </p>
+
+                <Link
+                  href="/new-post"
+                  className="group inline-flex items-center px-10 py-5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-2xl hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-lg shadow-lg"
+                >
+                  <svg
+                    className="w-6 h-6 mr-3 group-hover:rotate-90 transition-transform duration-200"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M12 4v16m8-8H4"
+                    />
+                  </svg>
+                  Create Your First Post
+                </Link>
+              </div>
             </div>
-            <h3 className="text-3xl font-bold text-gray-900 mb-8 py-4 px-6">
-              No posts yet
-            </h3>
-            <p className="text-gray-600 mb-16 max-w-lg mx-auto py-6 px-8 leading-relaxed text-lg">
-              Start your journaling journey by creating your first post
-            </p>
-            <Link
-              href="/new-post"
-              className="inline-flex items-center px-6 py-3 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-colors duration-200 shadow-sm hover:shadow-md text-lg"
-            >
-              <svg
-                className="w-6 h-6 mr-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M12 4v16m8-8H4"
-                />
-              </svg>
-              Create First Post
-            </Link>
           </div>
         ) : (
-          <div className="space-y-12">
-            {posts.map((post) => (
+          <div className="space-y-8 sm:space-y-12 lg:space-y-16">
+            {posts.map((post, index) => (
               <article
                 key={post.id}
-                className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md hover:border-gray-300 transition-all duration-200 p-2"
+                className="p-6 group relative bg-white/80 backdrop-blur-sm rounded-3xl shadow-lg border border-white/20 overflow-hidden hover:shadow-xl hover:bg-white hover:-translate-y-1 transition-all duration-300"
+                style={{
+                  animationDelay: `${index * 100}ms`,
+                  animation: "fadeInUp 0.6s ease-out forwards",
+                }}
               >
+                {/* Decorative gradient overlay */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-indigo-500"></div>
+
                 {/* Post Header */}
-                <div className="p-16 pb-12">
-                  <div className="flex justify-between items-start gap-10 mb-10">
-                    <h2 className="text-2xl font-bold text-gray-900 leading-tight flex-1 py-4 px-2">
+                <div className="p-8 sm:p-12 lg:p-16 pb-6 sm:pb-8 lg:pb-12">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-6 sm:gap-10 mb-8 sm:mb-10">
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight flex-1 group-hover:text-blue-900 transition-colors duration-300">
                       {post.title}
                     </h2>
-                    <div className="text-sm text-gray-500 bg-gray-50 px-8 py-4 rounded-lg whitespace-nowrap font-medium">
-                      {formatDate(post.createdAt)}
+                    <div className="flex-shrink-0">
+                      <div className="inline-flex items-center text-sm text-gray-500 bg-gradient-to-r from-gray-50 to-blue-50 px-4 sm:px-6 py-2 sm:py-3 rounded-xl border border-gray-200/50 font-medium shadow-sm">
+                        <svg
+                          className="w-4 h-4 mr-2 text-gray-400"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                          />
+                        </svg>
+                        {formatDate(post.createdAt)}
+                      </div>
                     </div>
                   </div>
 
                   {/* Author Info */}
-                  <div className="flex items-center gap-8 mb-10 py-6 px-2">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center text-gray-700 text-lg font-bold ring-2 ring-white shadow-sm p-2">
+                  <div className="flex items-center gap-4 sm:gap-6 mb-8 sm:mb-10 p-4 sm:p-6 bg-gradient-to-r from-gray-50/50 to-blue-50/50 rounded-2xl border border-gray-100/50">
+                    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-blue-100 to-indigo-200 flex items-center justify-center text-blue-800 text-lg sm:text-xl font-bold shadow-lg ring-4 ring-white/50">
                       {post.username.charAt(0).toUpperCase()}
                     </div>
-                    <div className="py-3 px-2">
-                      <div className="text-sm text-gray-500 mb-3 px-2 py-1">
+                    <div className="flex-1">
+                      <div className="text-xs sm:text-sm text-gray-500 mb-1 font-medium uppercase tracking-wide">
                         Author
                       </div>
                       <Link
                         href={`/profile/${post.uid}`}
-                        className="text-gray-900 hover:text-gray-700 font-semibold transition-colors px-3 py-2 text-lg rounded-lg hover:bg-gray-50"
+                        className="text-gray-900 hover:text-blue-700 font-semibold transition-all duration-200 text-lg sm:text-xl px-2 py-1 rounded-lg hover:bg-white/80 hover:shadow-sm"
                       >
                         {post.username}
                       </Link>
@@ -279,32 +315,35 @@ const HomePage = () => {
 
                 {/* Image Display */}
                 {post.photo && (
-                  <div className="px-16 pb-14">
-                    <div className="rounded-xl overflow-hidden bg-gray-100 shadow-sm p-2">
+                  <div className="px-8 sm:px-12 lg:px-16 pb-8 sm:pb-12 lg:pb-14">
+                    <div className="relative rounded-2xl overflow-hidden bg-gradient-to-br from-gray-50 to-blue-50 shadow-lg group-hover:shadow-xl transition-shadow duration-300">
                       <img
                         src={post.photo}
                         alt={post.title}
-                        className="w-full max-h-80 object-cover rounded-lg"
+                        className="w-full max-h-80 sm:max-h-96 object-cover transition-transform duration-300 group-hover:scale-105"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
                   </div>
                 )}
 
                 {/* Post Content */}
-                <div className="px-16 pb-16">
-                  <p className="text-gray-700 text-lg leading-relaxed py-6 px-4">
-                    {truncateContent(post.content)}
-                  </p>
+                <div className="px-8 sm:px-12 lg:px-16 pb-8 sm:pb-12 lg:pb-16">
+                  <div className="bg-gradient-to-r from-gray-50/50 to-blue-50/50 rounded-2xl p-6 sm:p-8 border border-gray-100/50">
+                    <p className="text-gray-700 text-lg sm:text-xl leading-relaxed">
+                      {truncateContent(post.content)}
+                    </p>
+                  </div>
                 </div>
 
                 {/* Post Footer */}
-                <div className="px-16 py-12 bg-gray-50 border-t border-gray-100">
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-6 py-4 px-2">
+                <div className="px-8 sm:px-12 lg:px-16 py-6 sm:py-8 lg:py-12 bg-gradient-to-r from-gray-50/80 to-blue-50/80 backdrop-blur-sm border-t border-gray-200/50">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-6">
+                    <div className="flex items-center gap-4">
                       {post.aiReview && (
-                        <span className="inline-flex items-center px-7 py-4 rounded-lg text-sm font-semibold bg-blue-50 text-blue-700 border border-blue-100">
+                        <span className="inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-blue-50 to-indigo-50 text-blue-700 border border-blue-200/50 shadow-sm">
                           <svg
-                            className="w-4 h-4 mr-3"
+                            className="w-4 h-4 mr-2"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                           >
@@ -320,14 +359,14 @@ const HomePage = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    {auth.currentUser && auth.currentUser.uid === post.uid && (
-                      <div className="flex items-center gap-4 py-4 px-2">
+                    {currentUser && currentUser.uid === post.uid && (
+                      <div className="flex items-center gap-3">
                         <Link
                           href={`/edit-post/${post.id}`}
-                          className="inline-flex items-center px-4 py-2 text-gray-700 hover:text-gray-900 font-medium rounded-lg hover:bg-white transition-all duration-200 border border-transparent hover:border-gray-200 text-lg"
+                          className="group inline-flex items-center px-6 py-3 text-gray-700 hover:text-blue-700 font-medium rounded-xl hover:bg-white/80 hover:shadow-md transition-all duration-200 border border-gray-200/50 hover:border-blue-200"
                         >
                           <svg
-                            className="w-5 h-5 mr-3"
+                            className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-200"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -344,10 +383,10 @@ const HomePage = () => {
                         <button
                           onClick={() => handleDeletePost(post.id, post.uid)}
                           disabled={deletingPostId === post.id}
-                          className="inline-flex items-center px-10 py-5 text-red-600 hover:text-red-800 font-medium rounded-lg hover:bg-white transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-transparent hover:border-red-200 text-lg"
+                          className="group inline-flex items-center px-6 py-3 text-red-600 hover:text-red-700 font-medium rounded-xl hover:bg-red-50/80 hover:shadow-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed border border-red-200/50 hover:border-red-300"
                         >
                           <svg
-                            className="w-5 h-5 mr-3"
+                            className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-200"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
