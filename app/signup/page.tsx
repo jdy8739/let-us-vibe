@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { useForm } from "react-hook-form";
-import { Button, TextInput, GitHubButton } from "@/src/components/shared";
 import Link from "next/link";
 import { auth } from "@/src/services/firebase";
 import {
@@ -52,7 +52,7 @@ const Signup = () => {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
       router.push("/");
-    } catch (err: unknown) {
+    } catch (e) {
       setError("root", {
         type: "server",
         message: "Failed to sign up with GitHub",

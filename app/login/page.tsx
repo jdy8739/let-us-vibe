@@ -1,6 +1,5 @@
 "use client";
 
-import { Button, TextInput, GitHubButton } from "@/src/components/shared";
 import { useForm } from "react-hook-form";
 import { auth } from "@/src/services/firebase";
 import { signInWithEmailAndPassword, updateProfile } from "firebase/auth";

@@ -1,7 +1,6 @@
 "use client";
 
 import { useForm } from "react-hook-form";
-import { Button, TextInput } from "@/src/components/shared";
 import Link from "next/link";
 import { auth } from "@/src/services/firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
