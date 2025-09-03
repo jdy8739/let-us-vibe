@@ -494,8 +494,11 @@ const ProfileSettingsPage = () => {
               style={{ padding: "3rem" }}
               className="bg-white rounded-3xl shadow-sm border border-gray-100"
             >
-              <div className="text-center mb-8">
-                <div className="w-16 h-16 bg-red-100 rounded-full mx-auto mb-4 flex items-center justify-center">
+              <div style={{ padding: "1rem" }} className="text-center mb-8">
+                <div
+                  style={{ padding: "0.5rem" }}
+                  className="w-16 h-16 bg-red-100 rounded-full mx-auto mb-4 flex items-center justify-center"
+                >
                   <svg
                     className="w-8 h-8 text-red-600"
                     fill="none"
@@ -510,35 +513,54 @@ const ProfileSettingsPage = () => {
                     />
                   </svg>
                 </div>
-                <h2 className="text-3xl font-bold text-red-900 mb-3">
+                <h2
+                  style={{ padding: "1rem 0" }}
+                  className="text-3xl font-bold text-red-900 mb-3"
+                >
                   Danger Zone
                 </h2>
-                <p className="text-lg text-red-700 max-w-2xl mx-auto">
+                <p
+                  style={{ padding: "0.5rem 1rem" }}
+                  className="text-lg text-red-700 max-w-2xl mx-auto"
+                >
                   These actions are irreversible and will permanently delete
                   your account and all associated data
                 </p>
               </div>
 
-              <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-8">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-red-900 mb-3">
+              <div
+                style={{ padding: "2rem" }}
+                className="bg-red-50 border-2 border-red-200 rounded-2xl"
+              >
+                <div style={{ padding: "1rem" }} className="text-center mb-6">
+                  <h3
+                    style={{ padding: "0.75rem 0" }}
+                    className="text-2xl font-bold text-red-900 mb-3"
+                  >
                     Delete Account
                   </h3>
-                  <p className="text-red-700 text-lg leading-relaxed">
+                  <p
+                    style={{ padding: "0.5rem 1rem" }}
+                    className="text-red-700 text-lg leading-relaxed"
+                  >
                     This action will permanently delete your account and all
                     associated data including posts and images.
                     <br />
-                    <span className="font-semibold">
+                    <span
+                      style={{ padding: "0.25rem" }}
+                      className="font-semibold"
+                    >
                       This action cannot be undone.
                     </span>
                   </p>
                 </div>
 
-                <div className="flex justify-end">
+                <div style={{ padding: "1rem" }} className="flex justify-end">
                   <button
                     onClick={handleDeleteAccount}
                     disabled={isDeleting}
-                    className="inline-flex items-center px-8 py-4 bg-red-600 text-white font-semibold rounded-xl hover:bg-red-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                    style={{ padding: "1rem 2rem" }}
+                    className="inline-flex items-center bg-red-600 text-white font-semibold rounded-xl hover:bg-red-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   >
                     {isDeleting ? (
                       <>
