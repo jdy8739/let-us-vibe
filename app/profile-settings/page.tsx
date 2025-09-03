@@ -588,10 +588,14 @@ const ProfileSettingsPage = () => {
             </div>
 
             {/* Navigation Links */}
-            <div className="flex justify-end space-x-4">
+            <div
+              style={{ padding: "1rem" }}
+              className="flex justify-end space-x-4"
+            >
               <Link
                 href="/"
-                className="inline-flex items-center px-4 py-2 bg-white text-gray-700 border-2 border-gray-200 font-semibold rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md text-lg"
+                style={{ padding: "0.5rem 1rem" }}
+                className="inline-flex items-center bg-white text-gray-700 border-2 border-gray-200 font-semibold rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md text-lg"
               >
                 <svg
                   className="w-5 h-5 mr-2"
@@ -610,7 +614,8 @@ const ProfileSettingsPage = () => {
               </Link>
               <Link
                 href={`/profile/${user?.uid}`}
-                className="inline-flex items-center px-4 py-2 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-lg hover:shadow-xl text-lg"
+                style={{ padding: "0.5rem 1rem" }}
+                className="inline-flex items-center bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-lg hover:shadow-xl text-lg"
               >
                 <svg
                   className="w-5 h-5 mr-2"

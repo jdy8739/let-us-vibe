@@ -202,7 +202,7 @@ const Login = () => {
           />
 
           {/* Sign Up Link */}
-          <div className="mt-8 text-right">
+          <div style={{ padding: "1rem" }} className="mt-8 text-right">
             <p style={{ padding: "0.5rem" }} className="text-gray-600">
               Don&apos;t have an account?{" "}
               <Link

@@ -164,12 +164,13 @@ const ResetPassword = () => {
           </form>
 
           {/* Back to Login Link */}
-          <div className="mt-8 text-right">
-            <p className="text-gray-600">
+          <div style={{ padding: "1rem" }} className="mt-8 text-right">
+            <p style={{ padding: "0.5rem" }} className="text-gray-600">
               Remember your password?{" "}
               <Link
                 href="/login"
-                className="text-blue-600 hover:text-blue-800 font-semibold hover:underline transition-colors px-2 py-1 rounded hover:bg-blue-50"
+                style={{ padding: "0.25rem 0.5rem" }}
+                className="text-blue-600 hover:text-blue-800 font-semibold hover:underline transition-colors rounded hover:bg-blue-50"
               >
                 Back to login
               </Link>

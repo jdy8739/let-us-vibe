@@ -234,12 +234,16 @@ const Signup = () => {
           </button>
 
           {/* Sign In Link */}
-          <div style={{ padding: "2rem 0 0 0" }} className="mt-8 text-right">
+          <div
+            style={{ padding: "2rem 1rem 0 1rem" }}
+            className="mt-8 text-right"
+          >
             <p style={{ padding: "0.5rem" }} className="text-gray-600">
               Already have an account?{" "}
               <Link
                 href="/login"
-                className="text-blue-600 hover:text-blue-800 font-semibold hover:underline transition-colors px-2 py-1 rounded hover:bg-blue-50"
+                style={{ padding: "0.25rem 0.5rem" }}
+                className="text-blue-600 hover:text-blue-800 font-semibold hover:underline transition-colors rounded hover:bg-blue-50"
               >
                 Sign in
               </Link>

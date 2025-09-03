@@ -200,25 +200,28 @@ const EditPostPage = ({ params }: { params: Promise<{ id: string }> }) => {
             <p className="text-gray-600 text-lg mb-8 max-w-md mx-auto">
               {error}
             </p>
-            <Link
-              href="/"
-              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
-            >
-              <svg
-                className="w-5 h-5 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            <div style={{ padding: "1rem" }}>
+              <Link
+                href="/"
+                style={{ padding: "0.5rem 1rem" }}
+                className="inline-flex items-center bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                />
-              </svg>
-              Back to Home
-            </Link>
+                <svg
+                  className="w-5 h-5 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                  />
+                </svg>
+                Back to Home
+              </Link>
+            </div>
           </div>
         ) : (
           <div
@@ -399,10 +402,14 @@ const EditPostPage = ({ params }: { params: Promise<{ id: string }> }) => {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex items-center justify-end gap-3 pt-6 border-t border-gray-200">
+              <div
+                style={{ padding: "1rem" }}
+                className="flex items-center justify-end gap-3 pt-6 border-t border-gray-200"
+              >
                 <Link
                   href="/"
-                  className="inline-flex items-center px-6 py-3 bg-white text-gray-700 border border-gray-200 font-medium rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md"
+                  style={{ padding: "0.5rem 1rem" }}
+                  className="inline-flex items-center bg-white text-gray-700 border border-gray-200 font-medium rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md"
                 >
                   <svg
                     className="w-4 h-4 mr-2"

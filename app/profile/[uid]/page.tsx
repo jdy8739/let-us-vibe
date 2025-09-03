@@ -191,12 +191,15 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
             <div className="text-red-600 text-lg mb-4">
               {error || "User not found"}
             </div>
-            <Link
-              href="/"
-              className="px-8 py-4 bg-gray-900 text-white rounded-lg hover:bg-gray-800 font-semibold text-lg transition-all duration-200"
-            >
-              Back to Home
-            </Link>
+            <div style={{ padding: "1rem" }}>
+              <Link
+                href="/"
+                style={{ padding: "0.5rem 1rem" }}
+                className="inline-flex items-center bg-gray-900 text-white rounded-lg hover:bg-gray-800 font-semibold text-lg transition-all duration-200"
+              >
+                Back to Home
+              </Link>
+            </div>
           </div>
         </main>
       </div>
@@ -252,12 +255,16 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
                 </div>
               </div>
             </div>
-            <div className="flex items-center gap-3">
+            <div
+              style={{ padding: "0.5rem" }}
+              className="flex items-center gap-3"
+            >
               {isCurrentUser ? (
                 <>
                   <Link
                     href="/profile-settings"
-                    className="inline-flex items-center px-5 py-2.5 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md"
+                    style={{ padding: "0.625rem 1.25rem" }}
+                    className="inline-flex items-center bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md"
                   >
                     <svg
                       className="w-4 h-4 mr-2"
@@ -276,7 +283,8 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
                   </Link>
                   <button
                     onClick={() => auth.signOut()}
-                    className="inline-flex items-center px-5 py-2.5 bg-white text-gray-700 border border-gray-200 font-medium rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md"
+                    style={{ padding: "0.625rem 1.25rem" }}
+                    className="inline-flex items-center bg-white text-gray-700 border border-gray-200 font-medium rounded-xl hover:bg-gray-50 hover:border-gray-300 transition-all duration-200 shadow-sm hover:shadow-md"
                   >
                     <svg
                       className="w-4 h-4 mr-2"
@@ -297,7 +305,8 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
               ) : (
                 <Link
                   href="/"
-                  className="inline-flex items-center px-5 py-2.5 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md"
+                  style={{ padding: "0.625rem 1.25rem" }}
+                  className="inline-flex items-center bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md"
                 >
                   <svg
                     className="w-4 h-4 mr-2"
@@ -489,10 +498,11 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
                   : "This user hasn't written any posts yet."}
               </p>
               {isCurrentUser && (
-                <div className="mt-2">
+                <div style={{ padding: "0.5rem" }} className="mt-2">
                   <Link
                     href="/new-post"
-                    className="inline-flex items-center px-4 py-2 bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md"
+                    style={{ padding: "0.5rem 1rem" }}
+                    className="inline-flex items-center bg-gray-900 text-white font-semibold rounded-xl hover:bg-gray-800 transition-all duration-200 shadow-sm hover:shadow-md"
                   >
                     <svg
                       className="w-4 h-4 mr-2"
@@ -573,10 +583,14 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
 
                       {/* Action Buttons for Current User */}
                       {isCurrentUser && (
-                        <div className="flex items-center gap-3">
+                        <div
+                          style={{ padding: "0.5rem" }}
+                          className="flex items-center gap-3"
+                        >
                           <Link
                             href={`/edit-post/${post.id}`}
-                            className="inline-flex items-center px-3 py-1 text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200 rounded hover:bg-gray-100"
+                            style={{ padding: "0.25rem 0.75rem" }}
+                            className="inline-flex items-center text-gray-700 hover:text-gray-900 font-medium transition-colors duration-200 rounded hover:bg-gray-100"
                           >
                             <svg
                               className="w-4 h-4 mr-1"
