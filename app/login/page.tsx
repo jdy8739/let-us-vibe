@@ -118,6 +118,15 @@ const Login = () => {
                   {errors.password.message}
                 </p>
               )}
+              <div style={{ padding: "0.5rem 0" }} className="text-right mt-2">
+                <Link
+                  href="/reset-password"
+                  style={{ padding: "0.25rem 0.5rem" }}
+                  className="text-blue-600 hover:text-blue-800 text-sm font-medium hover:underline transition-colors rounded hover:bg-blue-50"
+                >
+                  Forgot your password?
+                </Link>
+              </div>
             </div>
 
             {/* Error Message */}
