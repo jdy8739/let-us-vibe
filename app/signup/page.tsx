@@ -4,8 +4,14 @@ import { useForm } from "react-hook-form";
 import { Button, TextInput, GitHubButton } from "@/src/components/shared";
 import Link from "next/link";
 import { auth } from "@/src/services/firebase";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 type SignupFormValues = {
   name: string;
@@ -14,10 +20,9 @@ type SignupFormValues = {
   confirmPassword: string;
 };
 
-// GitHub icon is provided by shared GitHubButton
-
 const Signup = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -27,6 +32,7 @@ const Signup = () => {
   } = useForm<SignupFormValues>({ mode: "onBlur" });
 
   const onSubmit = async ({ name, email, password }: SignupFormValues) => {
+    setIsLoading(true);
     try {
       const cred = await createUserWithEmailAndPassword(auth, email, password);
       if (name) {
@@ -35,12 +41,28 @@ const Signup = () => {
       router.push("/");
     } catch (err: unknown) {
       setError("root", { type: "server", message: mapSignupError(err) });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGitHubSignUp = async () => {
+    setIsLoading(true);
+    try {
+      const provider = new GoogleAuthProvider();
+      await signInWithPopup(auth, provider);
+      router.push("/");
+    } catch (err: unknown) {
+      setError("root", {
+        type: "server",
+        message: "Failed to sign up with GitHub",
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const passwordValue = watch("password");
-
-  // GitHub OAuth handled by shared GitHubButton
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center px-6">
@@ -64,14 +86,14 @@ const Signup = () => {
           className="bg-white rounded-3xl shadow-sm border border-gray-100"
         >
           <form
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             style={{ padding: "1rem" }}
             className="space-y-6"
           >
             {/* Display Name Input */}
             <div style={{ padding: "0.75rem" }}>
               <label
-                htmlFor="displayName"
+                htmlFor="name"
                 style={{ padding: "0.5rem 0" }}
                 className="block text-sm font-semibold text-gray-900 mb-3"
               >
@@ -79,13 +101,16 @@ const Signup = () => {
               </label>
               <input
                 type="text"
-                id="displayName"
-                value={displayName}
-                onChange={(e) => setDisplayName(e.target.value)}
-                required
+                id="name"
+                {...register("name", { required: "Display name is required" })}
                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white"
                 placeholder="Enter your display name..."
               />
+              {errors.name && (
+                <p className="text-red-600 text-sm mt-1">
+                  {errors.name.message}
+                </p>
+              )}
             </div>
 
             {/* Email Input */}
@@ -100,12 +125,21 @@ const Signup = () => {
               <input
                 type="email"
                 id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: "Invalid email address",
+                  },
+                })}
                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white"
                 placeholder="Enter your email..."
               />
+              {errors.email && (
+                <p className="text-red-600 text-sm mt-1">
+                  {errors.email.message}
+                </p>
+              )}
             </div>
 
             {/* Password Input */}
@@ -120,16 +154,52 @@ const Signup = () => {
               <input
                 type="password"
                 id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
+                {...register("password", {
+                  required: "Password is required",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  },
+                })}
                 className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white"
                 placeholder="Create a password..."
               />
+              {errors.password && (
+                <p className="text-red-600 text-sm mt-1">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+
+            {/* Confirm Password Input */}
+            <div style={{ padding: "0.75rem" }}>
+              <label
+                htmlFor="confirmPassword"
+                style={{ padding: "0.5rem 0" }}
+                className="block text-sm font-semibold text-gray-900 mb-3"
+              >
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                {...register("confirmPassword", {
+                  required: "Please confirm your password",
+                  validate: (value) =>
+                    value === passwordValue || "Passwords do not match",
+                })}
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-blue-100 focus:border-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white"
+                placeholder="Confirm your password..."
+              />
+              {errors.confirmPassword && (
+                <p className="text-red-600 text-sm mt-1">
+                  {errors.confirmPassword.message}
+                </p>
+              )}
             </div>
 
             {/* Error Message */}
-            {error && (
+            {errors.root && (
               <div
                 style={{ padding: "1rem" }}
                 className="bg-red-50 border border-red-200 rounded-xl"
@@ -155,7 +225,7 @@ const Signup = () => {
                     style={{ padding: "0.25rem" }}
                     className="text-red-800 text-sm font-medium"
                   >
-                    {error}
+                    {errors.root.message}
                   </p>
                 </div>
               </div>
@@ -164,10 +234,10 @@ const Signup = () => {
             {/* Submit Button */}
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || isSubmitting}
               className="w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
             >
-              {isLoading ? (
+              {isLoading || isSubmitting ? (
                 <>
                   <svg
                     className="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline"
