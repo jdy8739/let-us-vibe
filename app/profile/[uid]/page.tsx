@@ -489,10 +489,16 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3
+                style={{ padding: "0.75rem 1rem" }}
+                className="text-xl font-semibold text-gray-900 mb-2"
+              >
                 No posts yet
               </h3>
-              <p className="text-gray-600 text-base mb-6 max-w-md mx-auto">
+              <p
+                style={{ padding: "0.5rem 1rem" }}
+                className="text-gray-600 text-base mb-6 max-w-md mx-auto"
+              >
                 {isCurrentUser
                   ? "Start writing your first journal post!"
                   : "This user hasn't written any posts yet."}
@@ -517,7 +523,9 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
                         d="M12 4v16m8-8H4"
                       />
                     </svg>
-                    Create First Post
+                    <span style={{ padding: "0.25rem" }}>
+                      Create First Post
+                    </span>
                   </Link>
                 </div>
               )}
@@ -532,10 +540,16 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
                   {/* Post Header */}
                   <div className="p-6 pb-4">
                     <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-semibold text-gray-900 leading-tight pr-4">
+                      <h3
+                        style={{ padding: "0.5rem 1rem 0.5rem 0" }}
+                        className="text-xl font-semibold text-gray-900 leading-tight"
+                      >
                         {post.title}
                       </h3>
-                      <div className="text-xs text-gray-600 bg-gray-50 px-2.5 py-1 rounded-full whitespace-nowrap">
+                      <div
+                        style={{ padding: "0.25rem 0.625rem" }}
+                        className="text-xs text-gray-600 bg-gray-50 rounded-full whitespace-nowrap"
+                      >
                         {formatDate(post.createdAt)}
                       </div>
                     </div>
@@ -554,7 +568,10 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
 
                   {/* Post Content */}
                   <div className="px-6 pb-5">
-                    <p className="text-gray-700 text-base leading-relaxed">
+                    <p
+                      style={{ padding: "0.75rem" }}
+                      className="text-gray-700 text-base leading-relaxed"
+                    >
                       {truncateContent(post.content)}
                     </p>
                   </div>
@@ -576,7 +593,9 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
                                 clipRule="evenodd"
                               />
                             </svg>
-                            AI Review
+                            <span style={{ padding: "0.125rem" }}>
+                              AI Review
+                            </span>
                           </span>
                         )}
                       </div>
@@ -605,9 +624,12 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
                                 d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                               />
                             </svg>
-                            Edit
+                            <span style={{ padding: "0.125rem" }}>Edit</span>
                           </Link>
-                          <button className="inline-flex items-center px-3 py-1.5 text-red-600 hover:text-red-800 font-medium transition-colors duration-200">
+                          <button
+                            style={{ padding: "0.375rem 0.75rem" }}
+                            className="inline-flex items-center text-red-600 hover:text-red-800 font-medium transition-colors duration-200"
+                          >
                             <svg
                               className="w-4 h-4 mr-1"
                               fill="none"
@@ -621,7 +643,7 @@ const UserProfilePage = ({ params }: { params: Promise<{ uid: string }> }) => {
                                 d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                               />
                             </svg>
-                            Delete
+                            <span style={{ padding: "0.125rem" }}>Delete</span>
                           </button>
                         </div>
                       )}
