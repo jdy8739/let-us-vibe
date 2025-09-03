@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "predeploy": "next build",
+    "deploy": "firebase deploy"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.12",
