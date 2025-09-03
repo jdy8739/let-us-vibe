@@ -160,7 +160,7 @@ const HomePage = () => {
             {currentUser && (
               <Link
                 href={`/profile/${currentUser.uid}`}
-                style={{ padding: "1rem 2rem" }}
+                style={{ padding: "0.75rem 1.5rem" }}
                 className="group inline-flex items-center bg-white/80 backdrop-blur-sm text-gray-700 border-2 border-gray-200/50 rounded-2xl hover:bg-white hover:border-gray-300 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 font-medium text-lg shadow-md"
               >
                 <svg
@@ -176,12 +176,12 @@ const HomePage = () => {
                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                   />
                 </svg>
-                <span style={{ padding: "0.5rem" }}>View Profile</span>
+                <span style={{ padding: "0.25rem" }}>View Profile</span>
               </Link>
             )}
             <Link
               href="/new-post"
-              style={{ padding: "1rem 2rem" }}
+              style={{ padding: "0.75rem 1.5rem" }}
               className="group inline-flex items-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-2xl hover:from-blue-700 hover:to-indigo-700 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 text-lg shadow-lg"
             >
               <svg
@@ -197,7 +197,7 @@ const HomePage = () => {
                   d="M12 4v16m8-8H4"
                 />
               </svg>
-              <span style={{ padding: "0.5rem" }}>Create New Post</span>
+              <span style={{ padding: "0.25rem" }}>Create New Post</span>
             </Link>
           </div>
         </div>
@@ -297,6 +297,8 @@ const HomePage = () => {
                   padding: "1.75rem", // px-7, py-7 = 1.75rem
                   animationDelay: `${index * 100}ms`,
                   animation: "fadeInUp 0.6s ease-out forwards",
+                  marginTop: "2rem",
+                  marginBottom: "2rem",
                 }}
               >
                 {/* Decorative gradient overlay */}

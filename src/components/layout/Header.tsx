@@ -33,9 +33,10 @@ const Header: React.FC = () => {
         <Link
           href="/"
           style={{ padding: "0.5rem 1rem" }}
-          className="text-2xl font-bold tracking-tight text-gray-900"
+          className="text-2xl font-bold tracking-tight text-gray-900 hover:text-blue-600 transition-all duration-200 rounded-xl hover:bg-blue-50/80 hover:shadow-sm transform hover:scale-105"
         >
-          Journal
+          <span style={{ padding: "0.25rem" }}>📝</span>
+          <span style={{ padding: "0.25rem 0.5rem" }}>Journal</span>
         </Link>
         <nav style={{ padding: "0.5rem" }} className="flex items-center">
           {currentUser ? (
@@ -43,9 +44,10 @@ const Header: React.FC = () => {
               <Link
                 href={`/profile/${currentUser.uid}`}
                 style={{ padding: "0.75rem 1.25rem", marginRight: "1rem" }}
-                className="hidden sm:inline-flex items-center h-11 rounded-xl border-2 border-gray-200 text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-300 transition-all text-base font-medium"
+                className="hidden sm:inline-flex items-center h-11 rounded-xl border-2 border-gray-200 text-gray-700 bg-white hover:bg-blue-50 hover:border-blue-300 hover:text-blue-700 transition-all text-base font-medium shadow-sm hover:shadow-md transform hover:scale-105"
               >
-                Profile
+                <span style={{ padding: "0.25rem" }}>👤</span>
+                <span style={{ padding: "0.25rem" }}>Profile</span>
               </Link>
               <Link
                 href="/new-post"
